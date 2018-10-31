@@ -27,11 +27,11 @@
         <link href="css/bootstrap.min.css" rel="stylesheet">
     </head>
     <body>
-        <h1>Hello, you're on the Settings page.</h1>
+        <h2>Personal Data:</h2>
 
         <div class="container">
-          <h3>Height</h3>
-        <form>
+          <h4>Height:</h4>
+        <form class="form-inline">
           <div class="col-xs-2">
             <label for="UserInput">feet</label>
             <select class="form-control" id="UserInput">
@@ -62,6 +62,7 @@
 
             </select>
           </div>
+        </form>
         </div>
 
 
@@ -99,9 +100,40 @@
               <option>2 AM</option>
               <option>3 AM or later</option>
             </select>
-        </div>
+          </div>
+        </form>
+    </body>
+
+    <body>
+        <h3>Alerts:</h3>
+        <div class="container">
+
+        <form class>
+          <div class="col-xs-2">
+            <label for="UserInput3">Alert Interval:</label>
+            <select class="form-control" id="UserInput3">
+              <option>every 10 minutes</option>
+              <option>every 15 minutes</option>
+              <option>every 30 minutes</option>
+              <option>every hour</option>
+            </select>
+          </div>
+      </form>
+    </body>
+
+
+    <body>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+      <div>
+        <form>
           <button type="button" class="btn btn-primary">Save</button>
-<button type="button" class="btn btn-secondary">Cancel</button>
-</form>
+          <button type="button" class="btn btn-secondary">Cancel</button>
+        </form>
+      </div>
     </body>
 </html>
