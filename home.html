@@ -1,9 +1,52 @@
 <!DOCTYPE html>
-<html>
-<head>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Energy Bar Home Page</title>
 
-</head>
-<body>
+        <!-- Bootstrap core CSS -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <!-- Bootstrap theme -->
+        <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+    </head>
+    <body>
+        <!-- Container for Jumbotron that includes current time & wake-up time -->
+        <div class="container">
+            <div class="jumbotron d-flex align-items-center">
+                <h1>(digital clock with current time)</h1>
+                <h2>Wake up at: (digital clock at specific time)</h2>    
+            </div>
+        </div>
 
-</body>
+        <!-- Pill tabs for Home, Health Effects, Data, and Settings -->
+        <div class="col-md-2">
+            <ul class="nav nav-pills nav-stacked">
+                <li class="active"><a data-toggle="pill" href="#home">Home</a></li>
+                <li><a data-toggle="pill" href="#health">Health Effects</a></li>
+                <li><a data-toggle="pill" href="#data">Data</a></li>
+                <li><a data-toggle="pill" href="#settings">Settings</a></li>
+            </ul>    
+        </div>
+
+        <!-- Contents for each pill tab when you click on it -->
+        <div class="tab-content">
+            <div id="home" class="tab-pane fade in active">
+            </div>
+            <div id="health" class="tab-pane fade">
+                <h3>You're in the health page.</h3>
+            </div>
+            <div id="data" class="tab-pane fade">
+                <h3>You're in the data page.</h3>
+            </div>
+            <div id="settings" class="tab-pane fade">
+                <h3>You're in the settings page</h3>
+            </div>
+        </div>
+
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="js/bootstrap.min.js"></script>
+    </body>
 </html> 
