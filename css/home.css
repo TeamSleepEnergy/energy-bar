@@ -1,0 +1,11 @@
+.navbar-fixed-left {
+    width: 140px;
+    position: fixed;
+    border-radius: 0;
+    height: 35%;
+}
+
+.navbar-fixed-left .navbar-nav > li {
+    float: none;
+    width: 140px;
+}
