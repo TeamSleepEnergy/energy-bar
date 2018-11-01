@@ -1,39 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Energy Bar Home Page</title>
 
-        <!-- Bootstrap core CSS -->
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <!-- Bootstrap theme -->
-        <link href="css/bootstrap-theme.min.css" rel="stylesheet">
-        <!-- Custom homepage CSS -->
-        <link href="css/index.css" rel="stylesheet">
-    </head>
-    <body>
-        <!-- Container for Jumbotron that includes current time & wake-up time -->
-        <div class="container">
-            <div class="jumbotron d-flex align-items-center">
-                <h1>(digital clock with current time)</h1>
-                <h2>Wake up at: (digital clock at specific time)</h2>    
-            </div>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Energy Bar Home Page</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap theme -->
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+    <!-- Custom navbar CSS -->
+    <link href="css/navbar.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Navigation bar -->
+    <div class="navbar navbar-inverse navbar-fixed-left">
+        <a class="navbar-brand" href="index.html">HOME</a>
+        <ul class="nav navbar-nav">
+            <li><a href="data.html">Data</a></li>
+            <li><a href="settings.html">Settings</a></li>
+        </ul>
+    </div>
+
+    <!-- Container for Jumbotron that includes current time & wake-up time -->
+    <div class="container">
+        <div class="jumbotron d-flex align-items-center">
+            <h1>(digital clock with current time)</h1>
+            <h2>Wake up at: (digital clock at specific time)</h2>
         </div>
+    </div>
 
-        <!-- Navigation bar -->
-        <div class="navbar navbar-inverse navbar-fixed-left">
-            <a class="navbar-brand" href="index.html">HOME</a>
-            <ul class="nav navbar-nav">
-                <li><a href="health.html">Health Effects</a></li>
-                <li><a href="data.html">Data</a></li>
-                <li><a href="settings.html">Settings</a></li>
-            </ul>
-        </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+</body>
 
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="js/bootstrap.min.js"></script>
-    </body>
-</html> 
+</html>

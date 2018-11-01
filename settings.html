@@ -1,139 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Settings Page</title>
 
-        <!-- Bootstrap -->
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-    </head>
-    <body>
-        <h1>Settings</h1>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings Page</title>
 
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="js/bootstrap.min.js"></script>
+  <!-- Bootstrap -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom navbar CSS -->
+  <link href="css/navbar.css" rel="stylesheet">
+</head>
 
-        <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Settings Page</title>
+<body>
+  <!-- Navigation bar -->
+  <div class="navbar navbar-inverse navbar-fixed-left">
+    <a class="navbar-brand" href="index.html">HOME</a>
+    <ul class="nav navbar-nav">
+      <li><a href="data.html">Data</a></li>
+      <li><a href="settings.html">Settings</a></li>
+    </ul>
+  </div>
 
-        <!-- Bootstrap -->
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-    </head>
-    <body>
-        <h2>Personal Data:</h2>
+  <div class="col-sm-2"></div>
 
-        <div class="container">
-          <h4>Height:</h4>
-        <form class="form-inline">
-          <div class="col-xs-2">
-            <label for="UserInput">feet</label>
-            <select class="form-control" id="UserInput">
-              <option>3 ft</option>
-              <option>4 ft</option>
-              <option>5 ft</option>
-              <option>6 ft</option>
-              <option>7 ft</option>
-            </select>
-          </div>
-
-          <div class="col-xs-2">
-            <label for="UserInput2">inches</label>
-            <select class="form-control" id="UserInput2">
-
-              <option>0 inches</option>
-              <option>1 inch</option>
-              <option>2 inches</option>
-              <option>3 inches</option>
-              <option>4 inches</option>
-              <option>5 inches</option>
-              <option>6 inches</option>
-              <option>7 inches</option>
-              <option>8 inches</option>
-              <option>9 inches</option>
-              <option>10 inches</option>
-              <option>11 inches</option>
-
-            </select>
-          </div>
-        </form>
+  <div class="col-sm-3">
+    <h1 align="center">Settings</h1>
+    <h2>Personal Data</h2>
+    <div class="container">
+      <h3>Height</h3>
+      <form>
+        <div class="col-xs-2">
+          <label for="UserInput">feet</label>
+          <select class="form-control" id="UserInput">
+            <option>3 ft</option>
+            <option>4 ft</option>
+            <option>5 ft</option>
+            <option>6 ft</option>
+            <option>7 ft</option>
+          </select>
         </div>
 
+        <div class="col-xs-2">
+          <label for="UserInput2">inches</label>
+          <select class="form-control" id="UserInput2">
+            <option>0 inches</option>
+            <option>1 inch</option>
+            <option>2 inches</option>
+            <option>3 inches</option>
+            <option>4 inches</option>
+            <option>5 inches</option>
+            <option>6 inches</option>
+            <option>7 inches</option>
+            <option>8 inches</option>
+            <option>9 inches</option>
+            <option>10 inches</option>
+            <option>11 inches</option>
+          </select>
+        </div>
+    </div>
 
-        <form>
-          <div class="form-group">
-            <label for="exampleFormControlSelect1">Gender</label>
-            <select class="form-control" id="exampleFormControlSelect1">
-              <option>Male</option>
-              <option>Female</option>
-              <option>Other/Prefer not to answer</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="exampleFormControlSelect1">Age (change to input)</label>
-            <select class="form-control" id="exampleFormControlSelect1">
-              <option>Younger than 18</option>
-              <option>18-30</option>
-              <option>31-50</option>
-              <option>51-80</option>
-              <option>Older than 80</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="exampleFormControlTextarea1">Weight (lb)</label>
-            <input class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-          </div>
-          <div class="form-group">
-            <label for="exampleFormControlSelect1">Usual Bedtime</label>
-            <select class="form-control" id="exampleFormControlSelect1">
-              <option>9 PM or earlier</option>
-              <option>10 PM</option>
-              <option>11 PM</option>
-              <option>12 AM</option>
-              <option>1 AM</option>
-              <option>2 AM</option>
-              <option>3 AM or later</option>
-            </select>
-          </div>
-        </form>
-    </body>
-
-    <body>
-        <h3>Alerts:</h3>
-        <div class="container">
-
-        <form class>
-          <div class="col-xs-2">
-            <label for="UserInput3">Alert Interval:</label>
-            <select class="form-control" id="UserInput3">
-              <option>every 10 minutes</option>
-              <option>every 15 minutes</option>
-              <option>every 30 minutes</option>
-              <option>every hour</option>
-            </select>
-          </div>
-      </form>
-    </body>
-
-
-    <body>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-      <div>
-        <form>
-          <button type="button" class="btn btn-primary">Save</button>
-          <button type="button" class="btn btn-secondary">Cancel</button>
-        </form>
+    <form>
+      <div class="form-group">
+        <label for="exampleFormControlSelect1">Gender</label>
+        <select class="form-control" id="exampleFormControlSelect1">
+          <option>Male</option>
+          <option>Female</option>
+          <option>Other/Prefer not to answer</option>
+        </select>
       </div>
-    </body>
+      <div class="form-group">
+        <label for="exampleFormControlSelect1">Age (change to input)</label>
+        <select class="form-control" id="exampleFormControlSelect1">
+          <option>Younger than 18</option>
+          <option>18-30</option>
+          <option>31-50</option>
+          <option>51-80</option>
+          <option>Older than 80</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlTextarea1">Weight (lb)</label>
+        <input class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlSelect1">Usual Bedtime</label>
+        <select class="form-control" id="exampleFormControlSelect1">
+          <option>9 PM or earlier</option>
+          <option>10 PM</option>
+          <option>11 PM</option>
+          <option>12 AM</option>
+          <option>1 AM</option>
+          <option>2 AM</option>
+          <option>3 AM or later</option>
+        </select>
+      </div>
+    </form>
+
+    <h3>Alerts:</h3>
+    <div class="container">
+      <form class>
+        <div class="col-xs-2">
+          <label for="UserInput3">Alert Interval:</label>
+          <select class="form-control" id="UserInput3">
+            <option>every 10 minutes</option>
+            <option>every 15 minutes</option>
+            <option>every 30 minutes</option>
+            <option>every hour</option>
+          </select>
+        </div>
+      </form>
+    </div>
+
+    <div class="wrapper">
+      <button type="button" class="btn btn-primary">Save</button>
+      <button type="button" class="btn btn-secondary">Cancel</button>
+    </div>
+  </div>
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="js/bootstrap.min.js"></script>
+
+</body>
+
 </html>
