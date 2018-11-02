@@ -10,9 +10,13 @@
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom navbar CSS -->
   <link href="css/navbar.css" rel="stylesheet">
+  <style>
+  div.form-group{text-indent: 10px;}
+  </style>
 </head>
 
 <body>
+
   <!-- Navigation bar -->
   <div class="navbar navbar-inverse navbar-fixed-left">
     <a class="navbar-brand" href="index.html">HOME</a>
@@ -27,11 +31,12 @@
   <div class="col-sm-3">
     <h1 align="center">Settings</h1>
     <h2>Personal Data</h2>
-    <div class="container">
-      <h3>Height</h3>
+  <!--  <div class="container"> -->
+  <div class="col-xs-8">
       <form>
-        <div class="col-xs-2">
-          <label for="UserInput">feet</label>
+      <!--  <div class="col-xs-2"> -->
+      <div class="form-group">
+          <label for="UserInput">Height</label>
           <select class="form-control" id="UserInput">
             <option>3 ft</option>
             <option>4 ft</option>
@@ -39,10 +44,10 @@
             <option>6 ft</option>
             <option>7 ft</option>
           </select>
-        </div>
+      <!--  </div>-->
 
-        <div class="col-xs-2">
-          <label for="UserInput2">inches</label>
+      <!--  <div class="col-xs-2"> -->
+          <label for="UserInput2"></label>
           <select class="form-control" id="UserInput2">
             <option>0 inches</option>
             <option>1 inch</option>
@@ -58,9 +63,9 @@
             <option>11 inches</option>
           </select>
         </div>
-    </div>
-
-    <form>
+      <!--  </div> -->
+  <!--  </div>
+ -->
       <div class="form-group">
         <label for="exampleFormControlSelect1">Gender</label>
         <select class="form-control" id="exampleFormControlSelect1">
@@ -70,14 +75,8 @@
         </select>
       </div>
       <div class="form-group">
-        <label for="exampleFormControlSelect1">Age (change to input)</label>
-        <select class="form-control" id="exampleFormControlSelect1">
-          <option>Younger than 18</option>
-          <option>18-30</option>
-          <option>31-50</option>
-          <option>51-80</option>
-          <option>Older than 80</option>
-        </select>
+        <label for="exampleFormControlSelect1">Age (years)</label>
+        <input class="form-control" id="exampleFormControlSelect1">
       </div>
       <div class="form-group">
         <label for="exampleFormControlTextarea1">Weight (lb)</label>
@@ -95,12 +94,11 @@
           <option>3 AM or later</option>
         </select>
       </div>
-    </form>
 
     <h3>Alerts:</h3>
-    <div class="container">
-      <form class>
-        <div class="col-xs-2">
+  <!--  <div class="container">
+        <div class="col-xs-2"> -->
+    <!--  <div class="col-xs-8"> -->
           <label for="UserInput3">Alert Interval:</label>
           <select class="form-control" id="UserInput3">
             <option>every 10 minutes</option>
@@ -108,15 +106,23 @@
             <option>every 30 minutes</option>
             <option>every hour</option>
           </select>
-        </div>
-      </form>
-    </div>
+    <!--    </div> -->
+      <!--  </div>
+    </div>-->
 
+
+    <br>
+  </br>
     <div class="wrapper">
       <button type="button" class="btn btn-primary">Save</button>
       <button type="button" class="btn btn-secondary">Cancel</button>
     </div>
+    </form>
   </div>
+</div>
+
+
+
 
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
