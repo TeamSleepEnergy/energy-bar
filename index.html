@@ -35,6 +35,11 @@
     </div>
 
     <div class="container">
+        <!-- Health effects popover -->
+        <a tabindex="0" class="btn btn-lg btn-info" role="button" data-toggle="popover" data-trigger="focus"
+        data-placement="bottom" data-content="(insert health facts for current energy level)">Health Effects</a>
+
+        <!-- Crude version of energy bar; FIX IN NEXT UPDATE -->
         <table>
             <tr>
                 <td height=40>&nbsp;</td>
@@ -71,10 +76,18 @@
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Popper (necessary for Bootstrap's Popover functionality) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
     <!-- JavaScript for side nav bar functionality -->
     <script src="js/sidenav.js"></script>
+    <!-- Activate Health Effects popover -->
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="popover"]').popover();
+        });
+    </script>
 </body>
 
 </html>
