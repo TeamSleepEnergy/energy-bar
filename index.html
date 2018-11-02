@@ -10,32 +10,36 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap theme -->
     <link href="css/bootstrap-theme.min.css" rel="stylesheet">
-    <!-- Custom navbar CSS -->
-    <link href="css/navbar.css" rel="stylesheet">
     <!-- Custom Energy Bar CSS -->
     <link href="css/energybar.css" rel="stylesheet">
-    <!--<link href="css/energy-bar.css" rel="stylesheet"> -->
+    <!-- Custom side nav bar CSS -->
+    <link href="css/sidenav.css" rel="stylesheet">
 </head>
 
 <body>
-    <!-- Navigation bar -->
-    <div class="navbar navbar-inverse navbar-fixed-left">
-        <a class="navbar-brand" href="index.html">HOME</a>
-        <ul class="nav navbar-nav">
-            <li><a href="data.html">Data</a></li>
-            <li><a href="settings.html">Settings</a></li>
-        </ul>
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="index.html">Home</a>
+        <a href="data.html">Data</a>
+        <a href="settings.html">Settings</a>
     </div>
+
+    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; menu</span>
 
     <!-- Container for Jumbotron that includes current time & wake-up time -->
     <div class="container">
         <div class="jumbotron d-flex align-items-center">
-            <h1>(digital clock with current time)</h1>
-            <h2>Wake up at: (digital clock at specific time)</h2>
+            <h1 align="center">(digital clock with current time)</h1>
+            <h2 align="center">Wake up at: (digital clock at specific time)</h2>
         </div>
     </div>
 
     <div class="container">
+        <!-- Health effects popover -->
+        <a tabindex="0" class="btn btn-lg btn-info" role="button" data-toggle="popover" data-trigger="focus"
+        data-placement="bottom" data-content="(insert health facts for current energy level)">Health Effects</a>
+
+        <!-- Crude version of energy bar; FIX IN NEXT UPDATE -->
         <table>
             <tr>
                 <td height=40>&nbsp;</td>
@@ -77,8 +81,18 @@
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Popper (necessary for Bootstrap's Popover functionality) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
+    <!-- JavaScript for side nav bar functionality -->
+    <script src="js/sidenav.js"></script>
+    <!-- Activate Health Effects popover -->
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="popover"]').popover();
+        });
+    </script>
 </body>
 
 </html>
