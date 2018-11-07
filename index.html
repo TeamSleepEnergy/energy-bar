@@ -3,30 +3,21 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" http-equiv="Content-Type">
     <title>Energy Bar Home Page</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap theme -->
     <link href="css/bootstrap-theme.min.css" rel="stylesheet">
-    <!-- Custom Energy Bar CSS -->
-    <link href="css/energybar.css" rel="stylesheet">
     <!-- Custom side nav bar CSS -->
     <link href="css/sidenav.css" rel="stylesheet">
     <!--Energy bar css-->
     <link href="css/energy-bar.css" rel="stylesheet">
-    <!--Inc/Decrease energy bar js-->
-    <script src="js/timing.js"></script>
-    <!--timepicker stuff -->
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link type="text/css" href="css/bootstrap.min.css" />
-    <link type="text/css" href="css/bootstrap-timepicker.min.css" />
-    <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap-timepicker.min.js"></script>
-
-
+    <!-- CSS for clock -->
+    <link href="css/clock.css" rel="stylesheet">
+    <!-- CSS for timepicker -->
+    <link href="css/bootstrap-timepicker.min.css">
 </head>
 
 <body>
@@ -36,7 +27,7 @@
         <a href="data.html">Data</a>
         <a href="settings.html">Settings</a>
         <text> ----------------------------------------------</text>
-        <a href= "login.html">Log out</a>
+        <a href="login.html">Log out</a>
     </div>
 
     <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; menu</span>
@@ -44,17 +35,11 @@
     <!-- Container for Jumbotron that includes current time & wake-up time -->
     <div class="container">
         <div class="jumbotron d-flex align-items-center">
-            <h1 align="center">9:00 AM</h1>
-            <!--  <h2 align="center">Wake up at: (digital clock at specific time)</h2>
-=======
-            <h1 align="center">(digital clock with current time)</h1> -->
-            <!--  <h2 align="center">Wake up at:</h2>-->
-            <div align="center">
-                <div class="col-xs-2"></div>
-                <div class="col-xs-2"></div>
+            <div id="clockbox"></div>
+            <div class="div-horizontal" align="center">
+                <label class="col-sm-5 control-label" for="UserInput"><i>Wake up at:</i></label>
                 <div class="col-sm-3">
-                    <label for="UserInput">Wake up at:</label>
-                    <select class="form-control" id="UserInput">
+                    <select class="form-control input-sm" id="UserInput" autofocus>
                         <option>3:00 AM</option>
                         <option>3:30 AM</option>
                         <option>4:00 AM</option>
@@ -79,15 +64,17 @@
                         <option>1:30 PM</option>
                         <option>2:00 PM</option>
                     </select>
-                    <button id ="setButton" type="button" class="btn"
-                      onclick="initBar()">
-                      Set</button>
+                </div>
+                <div class="col-sm-2" align="left">
+                    <button id="setButton" type="button" class="btn" onclick="initBar()">
+                        Set</button>
                 </div>
             </div>
+        </div>
+    </div>
 
-
-            <!--timepicker stuff-->
-            <!--  <div class="input-group bootstrap-timepicker timepicker">
+    <!--timepicker stuff-->
+    <!--  <div class="input-group bootstrap-timepicker timepicker">
             <input id="timepicker1" type="text" class="form-control input-small">
             <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
         </div>
@@ -97,95 +84,54 @@
         </script>
 -->
 
-        </div>
-    </div>
-
-
-    <div class="container">
+    <div class="container" align="right">
         <!-- Health effects popover -->
         <a tabindex="0" class="btn btn-lg btn-info" role="button" data-toggle="popover" data-trigger="focus"
             data-placement="bottom" data-content="(insert health facts for current energy level)">Health Effects</a>
-
-        <!-- Crude version of energy bar; FIX IN NEXT UPDATE
-        <table>
-            <tr>
-                <td height=40>&nbsp;</td>
-            </tr>
-            <tr>
-                <td height=40>&nbsp;</td>
-            </tr>
-            <tr>
-                <td height=40 bgcolor="#00FF00">&nbsp;</td>
-            </tr>
-            <tr>
-                <td height=40 bgcolor="#00FF00">&nbsp;</td>
-            </tr>
-            <tr>
-                <td height=40 bgcolor="#00FF00">&nbsp;</td>
-            </tr>
-            <tr>
-                <td height=40 bgcolor="#00FF00">&nbsp;</td>
-            </tr>
-            <tr>
-                <td height=40 bgcolor="#00FF00">&nbsp;</td>
-            </tr>
-            <tr>
-                <td height=40 bgcolor="#00FF00">&nbsp;</td>
-            </tr>
-            <tr>
-                <td height=40 bgcolor="#00FF00">&nbsp;</td>
-            </tr>
-            <tr>
-                <td height=40 bgcolor="#00FF00">&nbsp;</td>
-            </tr>
-        </table>
-      -->
     </div>
-<div class="container">
-  <div align="center">
-    <br>
-  </br>
-<div class="col">
-    <!--<div class="progress progress-bar-vertical">
+    
+    <div class="container">
+        <div align="center">
+            <br>
+            <br>
+            <div class="col">
+                <!--<div class="progress progress-bar-vertical">
         <div class="progress-bar" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="height: 30%;">
           <span class="sr-only">30% Complete</span>
         </div>
       </div>-->
-      <div class="progress vertical">
-  <div id="bar" class="progress-bar progress-bar-info" role="progressbar"
-   aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 0%;
-   background-color:red !important;">
-  </div>
-</div>
-    </div
-  </div>
-</div>
+                <div class="progress vertical">
+                    <div id="bar" class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="90"
+                        aria-valuemin="0" aria-valuemax="100" style="width: 0%;
+             background-color:red !important;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<!--Energy bar related functions-->
-<script>
-var energyBar = document.getElementById("bar");
+    <!--Energy bar related functions-->
+    <script>
+        var energyBar = document.getElementById("bar");
 
-function initBar(){
-  //id.style.width = "100%";
-  $("#bar").css("width", 100 +"%");
-}
+        function initBar() {
+            //id.style.width = "100%";
+            $("#bar").css("width", 100 + "%");
+        }
 
 
-$(function() {
-  var current_progress = 100; //replace this value with val relative to time
-  var interval = setInterval(function() {
-      current_progress -= 10; //
-      $("#bar").css("width", current_progress + "%")
-      //.attr("aria-valuenow", current_progress)
-      //.text(current_progress + "% Complete");
-      /*if(current_progress <= 0)
-          clearInterval(interval);*/
-  }, 1000); //scale this to wake up time
-});
-
-var barTimer = setInterval(decBar, 1);
-</script>
-
+        $(function () {
+            var current_progress = 100; //replace this value with val relative to time
+            var interval = setInterval(function () {
+                current_progress -= 10; //
+                $("#bar").css("width", current_progress + "%")
+                //.attr("aria-valuenow", current_progress)
+                //.text(current_progress + "% Complete");
+                /*if(current_progress <= 0)
+                    clearInterval(interval);*/
+            }, 1000); //scale this to wake up time
+        });
+    </script>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Popper (necessary for Bootstrap's Popover functionality) -->
@@ -200,6 +146,12 @@ var barTimer = setInterval(decBar, 1);
             $('[data-toggle="popover"]').popover();
         });
     </script>
+    <!-- Increase/ decrease energy bar JavaScript-->
+    <script src="js/timing.js"></script>
+    <!-- JavaScript for clock -->
+    <script src="js/clock.js"></script>
+    <!-- JavaScript for timepicker -->
+    <script src="js/bootstrap-timepicker.min.js"></script>
 </body>
 
 </html>
