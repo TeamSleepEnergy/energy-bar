@@ -1,3 +1,3 @@
 # Sleep Energy Bar Web App
 
-https://teamsleepenergy.github.io/energy-bar/index
+https://teamsleepenergy.github.io/energy-bar/login
