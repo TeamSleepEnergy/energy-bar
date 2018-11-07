@@ -16,3 +16,10 @@
     text-align: center;
     height: 100%;
 }
+
+#setButton {
+    font-size: 1.05em;
+    text-align: center;
+    height: 100%;
+    width: 50%;
+}
