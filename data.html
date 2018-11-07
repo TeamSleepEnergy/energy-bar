@@ -10,9 +10,25 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom side nav bar CSS -->
     <link href="css/sidenav.css" rel="stylesheet">
+
+
+    <script>
+      function draw(){
+        var canvas = document.getElementById("myCanvas");
+        var ctx= canvas.getContext("2d");
+
+        var X=0;
+        var Y=400;
+        var width = 200;
+        var height = 100;
+        ctx.fillStyle = "red";
+        ctx.fillRect(X,Y, width, height);
+
+      }
+    </script>
 </head>
 
-<body>
+<body onload="draw()">
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <a href="index.html">Home</a>
@@ -25,10 +41,14 @@
     <span style="font-size:3em;cursor:pointer" onclick="openNav()">&#9776;</span>
 
     <!-- Container for Jumbotron that contains graph with Data -->
-    <div class="container">
-        <div class="jumbotron d-flex align-items-center">
-            <h1 align="center">(data graph goes here)</h1>
-        </div>
+
+
+    <div align="center">
+      <h1> Your Data </h1>
+    </br><br>
+      <canvas id="myCanvas" width="600" height="500"
+        style="border:1px solid #000000;">
+      </canvas>
     </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
