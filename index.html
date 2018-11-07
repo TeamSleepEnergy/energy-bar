@@ -14,8 +14,10 @@
     <link href="css/energybar.css" rel="stylesheet">
     <!-- Custom side nav bar CSS -->
     <link href="css/sidenav.css" rel="stylesheet">
-
+    <!--Energy bar css-->
     <link href="css/energy-bar.css" rel="stylesheet">
+    <!--Inc/Decrease energy bar js-->
+    <script src="js/timing.js"></script>
     <!--timepicker stuff -->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link type="text/css" href="css/bootstrap.min.css" />
@@ -147,13 +149,17 @@
         </div>
       </div>-->
       <div class="progress vertical">
-  <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 70%;">
+  <div id="bar" class="progress-bar progress-bar-info" role="progressbar"
+   aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 70%;">
   </div>
 </div>
-    </div>
+    </div
   </div>
 </div>
 
+<script>
+document.getElementById('bar').style.width='0%';
+</script>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Popper (necessary for Bootstrap's Popover functionality) -->
