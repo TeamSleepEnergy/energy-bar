@@ -1,49 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>Login Page</title>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <!-- Bootstrap -->
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/energybar.css" rel="stylesheet">
-        <link href="css/login.css" rel="stylesheet">
-    </head>
-    <body>
+  <title>Login Page</title>
 
+  <!-- Bootstrap -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/energybar.css" rel="stylesheet">
+  <link href="css/login.css" rel="stylesheet">
+</head>
 
+<body>
+  <div align="center" class="box">
 
+    <h1>Login Page</h1>
 
+    <form>
 
-
-        <div align="center" class="box">
-
-            <h1>Login Page</h1>
-
-            <form>
-
-              <div class="form-group">
-                <label for="exampleFormControlSelect1">Username ID</label>
-                <input class="form-control" id="UserInput">
-              </div>
-              <div class="form-group">
-                <label for="exampleFormControlTextarea1">Password</label>
-                <input class="form-control" id="Userpassword" rows="3"></textarea>
-              </div>
-              <a href="index.html" class="btn btn-primary">  Login</a>
-
-            </form>
-
+      <div class="form-group">
+        <label for="exampleFormControlSelect1">Username ID</label>
+        <input class="form-control" id="UserInput">
       </div>
+      <div class="form-group">
+        <label for="exampleFormControlTextarea1">Password</label>
+        <input type="password" class="form-control" id="Userpassword" rows="3"></textarea>
+        <input type="checkbox" onclick="showPassword()">Show Password
+      </div>
+      <a href="index.html" class="btn btn-primary"> Login</a>
 
+    </form>
 
+  </div>
 
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="js/bootstrap.min.js"></script>
+  <!-- JavaScript to activate showing password; password hidden by default -->
+  <script>
+    function showPassword() {
+      var x = document.getElementById("Userpassword");
 
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="js/bootstrap.min.js"></script>
-    </body>
+      if (x.type == "password") {
+        x.type = "text";
+      } else {
+        x.type = "password";
+      }
+    }
+  </script>
+</body>
+
 </html>
