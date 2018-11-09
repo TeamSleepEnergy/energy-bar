@@ -71,6 +71,8 @@
                         <option>01:00 PM</option>
                         <option>01:30 PM</option>
                         <option>02:00 PM</option>
+                        <option>06:00 PM</option>
+                        <option>10:00 PM</option>
                     </select>
                 </div>
                 <div class="col-sm-2" align="left">
@@ -135,9 +137,16 @@
             var wakeHour = Number(wakeUpString.charAt(0)+wakeUpString.charAt(1));
             var wakeMin = Number(wakeUpString.charAt(3)+wakeUpString.charAt(4));
             var pmCheck = wakeUpString.charAt(6);
-            var sleptHours = Math.abs((24 - hour) + wakeHour);
+            var sleptHours = 0;/*Math.abs((24 - hour) + wakeHour);*/
             if(pmCheck == "P"){
-                sleptHours += 12;
+                wakeHour += 12;
+            }
+            if (hour > wakeHour) {
+                sleptHours = 24 - hour + wakeHour;
+            
+            } else if (hour < wakeHour) {
+                sleptHours = wakeHour - hour;
+
             }
             var sleptMin = Math.abs((60 - min) - wakeMin);
             if(min > wakeMin){
