@@ -134,7 +134,11 @@
             var wakeUpString = dropDown.options[dropDown.selectedIndex].text;
             var wakeHour = Number(wakeUpString.charAt(0)+wakeUpString.charAt(1));
             var wakeMin = Number(wakeUpString.charAt(3)+wakeUpString.charAt(4));
+            var pmCheck = wakeUpString.charAt(6);
             var sleptHours = Math.abs((24 - hour) + wakeHour);
+            if(pmCheck == "P"){
+                sleptHours += 12;
+            }
             var sleptMin = Math.abs((60 - min) - wakeMin);
             if(min > wakeMin){
               var carryover = 1;
