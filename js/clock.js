@@ -4,8 +4,8 @@ window.onload = function() {
 
 /**
  * Convert from 24 hour format to 12 hour format
- * 
- * @param {*} hour 
+ *
+ * @param {*} hour
  */
 function twelveHourFormat(hour) {
     newHour = hour;
@@ -23,8 +23,8 @@ function twelveHourFormat(hour) {
 
 /**
  * Determines if time should be AM or PM depending on the passed-in hour
- * 
- * @param {*} hour 
+ *
+ * @param {*} hour
  */
 function ampm(hour) {
     if (hour >= 12) {
