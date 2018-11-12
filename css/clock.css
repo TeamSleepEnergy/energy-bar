@@ -22,4 +22,6 @@
     text-align: center;
     height: 100%;
     width: 50%;
+    color: white; /* Text color */
+    background-color: #555555;
 }
