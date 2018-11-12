@@ -18,10 +18,35 @@
     <link href="css/clock.css" rel="stylesheet">
     <!-- CSS for timepicker -->
     <link href="css/bootstrap-timepicker.min.css">
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" ></script>
+    <!-- Popper (necessary for Bootstrap's Popover functionality) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- JavaScript for side nav bar functionality -->
+    <script src="js/sidenav.js"></script>
+    <!-- JavaScript for clock -->
+    <script src="js/clock.js"></script>
     <!-- Increase/ decrease energy bar JavaScript-->
-    <script src="js/timing.js"></script>
-    <script src="js/jquery.min.js"></script>
     <script src="js/energy-bar.js"></script>
+    <script src="js/alert.js"></script>
+    <!-- Activate Health Effects popover -->
+    <script>
+        $(document).ready(function () {
+            $('[rel="popover"]').popover({
+                html: true,
+                content: function () {
+                    var content = $($(this).data('popover-content')).clone(true).removeClass(
+                        'hidden');
+                    return content;
+                }
+            }).click(function (e) {
+                e.preventDefault();
+            });
+        });
+    </script>
 </head>
 
 <body>
@@ -34,7 +59,7 @@
         <a href="login.html">Log out</a>
     </div>
 
-    <span style="font-size:3em;cursor:pointer" onclick="openNav()">&#9776; menu</span>
+    <span style="font-size:3.7em;cursor:pointer;position:absolute;top:3%;left:1.5%" onclick="openNav()">&#9776;</span>
 
     <!-- Display for current time, and wake-up time selection -->
     <div class="container">
@@ -135,36 +160,8 @@
     <!--Energy bar related functions-->
     <script>
         var energyBar = document.getElementById("bar");
-        initBar();
+        percentAlert();
     </script>
-
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <!-- Popper (necessary for Bootstrap's Popover functionality) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
-    <!-- JavaScript for side nav bar functionality -->
-    <script src="js/sidenav.js"></script>
-    <!-- Activate Health Effects popover -->
-    <script>
-        $(document).ready(function () {
-            $('[rel="popover"]').popover({
-                html: true,
-                content: function () {
-                    var content = $($(this).data('popover-content')).clone(true).removeClass(
-                        'hidden');
-                    return content;
-                }
-            }).click(function (e) {
-                e.preventDefault();
-            });
-        });
-    </script>
-    <!-- JavaScript for clock -->
-    <script src="js/clock.js"></script>
-    <!-- JavaScript for timepicker -->
-    <script src="js/bootstrap-timepicker.min.js"></script>
 </body>
 
 </html>

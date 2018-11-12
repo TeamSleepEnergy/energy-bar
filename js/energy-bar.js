@@ -1,7 +1,8 @@
+/**
+ * Will initialize the energy bar to an approximate energy percentage with 
+ * respect to the amount of time you intend to sleep.
+ */
 function initBar() {
-    //id.style.width = "100%";
-    //$("#bar").css("width", 100 + "%");
-    //$("#bar").attr("aria-valuenow", "100");
     $("#bar").css("width", 100 + "%");
     $("#bar").attr("aria-valuenow", "100");
     var date = new Date();
@@ -14,7 +15,7 @@ function initBar() {
     var pmCheck = wakeUpString.charAt(6);
 
     // Calculate hours slept to energy percentage
-    var sleptHours = 0; /*Math.abs((24 - hour) + wakeHour);*/
+    var sleptHours = 0;
     if (pmCheck == "P") {
         wakeHour += 12;
     }
@@ -40,7 +41,7 @@ function initBar() {
     }
 
     var totalSleep = (sleptHours - carryover) * 60 + sleptMin;
-    var current_progress = 100 //parseInt($("#bar").css("width")); //replace this value with val relative to time
+    var current_progress = 100;
 
     if (totalSleep < 480) {
         current_progress = (totalSleep / 480) * 100;
@@ -51,10 +52,9 @@ function initBar() {
         current_progress -= 1; //
         $("#bar").css("width", current_progress + "%")
             .attr("aria-valuenow", current_progress)
-        //.text(current_progress + "% Complete");
         if (current_progress <= 0)
             clearInterval(interval);
-    }, 288000); //scale this to wake up time*/
+    }, 288000); // Scale this to wake up time
 
     return current_progress;
 }
