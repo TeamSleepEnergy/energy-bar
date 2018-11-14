@@ -10,6 +10,11 @@
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom side nav bar CSS -->
   <link href="css/sidenav.css" rel="stylesheet">
+  <style>
+  b.a{
+    display: none;
+  }
+  </style>
 </head>
 
 <body>
@@ -90,7 +95,7 @@
       </select>
     </div>
 
-  <h3>Alerts:</h3>
+  <h3>Alerts</h3>
       <!--<div class="col-xs-2">-->
         <label for="UserInput3">Alert Interval:</label>
         <select class="form-control" id="UserInput3">
@@ -101,12 +106,21 @@
         </select>
       <!--</div>-->
 
-
-  <button type="button" class="btn btn-primary">Save</button>
-  <button type="button" class="btn btn-secondary">Cancel</button>
+<br></br>
+  <button type="button" class="btn btn-primary" onclick="save();">Save</button>
+  <b class="a">Saved!</b>
+  <!--<button type="button" class="btn btn-secondary">Cancel</button>-->
       </form>
 </div>
 </div>
+
+<script>
+  function save(){
+    $(".a").fadeIn();
+    $(".a").fadeOut();
+  }
+
+</script>
 
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
