@@ -43,7 +43,6 @@
                 <label class="col-sm-5 control-label" for="UserInput"><i>Wake up at:</i></label>
                 <div class="col-sm-3">
                     <select class="form-control input-sm" id="UserInput" autofocus>
-
                         <option>01:00 AM</option>
                         <option>01:30 AM</option>
                         <option>02:00 AM</option>
@@ -93,9 +92,12 @@
             $('#timepicker1').timepicker();
         </script>
 -->
-
+  <div class ="container" align="center">
+    <h1>Time Remaining:</h1>
+    <h2>X%</h2>
+      </div>
     <div class="container" align="right">
-        <!-- Health effects popover -->
+        <!-- Health eff:ects popover -->
         <a rel="popover" tabindex="0" class="btn btn-lg btn-info" role="button" data-toggle="popover" data-trigger="focus"
             data-placement="bottom" data-html="true" data-popover-content="#effects">Health Effects</a>
 
@@ -131,53 +133,55 @@
     <!--Energy bar related functions-->
     <script>
         var energyBar = document.getElementById("bar");
+        function stopInterval(){
+          clearInterval(interval);
+        }
 
         function initBar() {
             //id.style.width = "100%";
             //$("#bar").css("width", 100 + "%");
             //$("#bar").attr("aria-valuenow", "100");
-            $("#bar").css("width", 100 + "%");
-            $("#bar").attr("aria-valuenow", "100");
-            var date = new Date();
-            var hour = date.getHours();
-            var min = date.getMinutes();
-            var dropDown = document.getElementById("UserInput");
-            var wakeUpString = dropDown.options[dropDown.selectedIndex].text;
-            var wakeHour = Number(wakeUpString.charAt(0) + wakeUpString.charAt(1));
-            var wakeMin = Number(wakeUpString.charAt(3) + wakeUpString.charAt(4));
-            var pmCheck = wakeUpString.charAt(6);
-            var sleptHours = 0; /*Math.abs((24 - hour) + wakeHour);*/
-            if (pmCheck == "P") {
-                wakeHour += 12;
-            }
-            if (hour > wakeHour) {
-                sleptHours = 24 - hour + wakeHour;
 
-            } else if (hour < wakeHour) {
-                sleptHours = wakeHour - hour;
+            /*$("#bar").css("width", 100 + "%");
+            $("#bar").attr("aria-valuenow", "100");*/
 
-            }
-            var sleptMin = Math.abs((60 - min) - wakeMin);
-            if (min > wakeMin) {
-                var carryover = 1;
-            } else {
-                var carryover = 0;
-            }
-            var totalSleep = (sleptHours - carryover) * 60 + sleptMin;
-            var current_progress = 100 //parseInt($("#bar").css("width")); //replace this value with val relative to time
-
-            if (totalSleep < 480) {
-                current_progress = (totalSleep / 480) * 100;
-            }
-            $("#bar").css("width", current_progress + "%")
             var interval = setInterval(function () {
-                current_progress -= 1; //
+              var date = new Date();
+              var hour = date.getHours();
+              var min = date.getMinutes();
+              var dropDown = document.getElementById("UserInput");
+              var wakeUpString = dropDown.options[dropDown.selectedIndex].text;
+              var wakeHour = Number(wakeUpString.charAt(0) + wakeUpString.charAt(1));
+              var wakeMin = Number(wakeUpString.charAt(3) + wakeUpString.charAt(4));
+              var pmCheck = wakeUpString.charAt(6);
+              var sleptHours = 0; /*Math.abs((24 - hour) + wakeHour);*/
+              if (pmCheck == "P" && hour != 12) {
+                  wakeHour += 12;
+              }
+              if (hour > wakeHour) {
+                  sleptHours = 24 - hour + wakeHour;
+
+              } else if (hour < wakeHour) {
+                  sleptHours = wakeHour - hour;
+
+              }
+              var sleptMin = Math.abs((60 - min) - wakeMin);
+              if (min > wakeMin) {
+                  var carryover = 1;
+              } else {
+                  var carryover = 0;
+              }
+              var totalSleep = (sleptHours - carryover) * 60 + sleptMin;
+              var current_progress = (totalSleep / 480) * 100;
+
+              /*$("#bar").css("width", current_progress + "%")
+                current_progress -= 1; //*/
                 $("#bar").css("width", current_progress + "%")
                     .attr("aria-valuenow", current_progress)
                 //.text(current_progress + "% Complete");
                 if (current_progress <= 0)
                     clearInterval(interval);
-            }, 288000); //scale this to wake up time*/
+            }, 300); //scale this to wake up time*/
         }
 
         /*       $(function () {
