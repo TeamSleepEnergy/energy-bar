@@ -20,16 +20,16 @@
         var canvas = document.getElementById('myCanvas');
         var ctx= canvas.getContext("2d");
 
-        var width=40; //bar width
-        var X = 50; //first bar position
+        var width=50; //bar width
+        var X = 100; //first bar position
 
 
         ctx.fillStyle = "red";
 
         for (var i =0; i<graphValues.length;i++){
           var h = graphValues[i];
-          ctx.fillRect(X,canvas.height - h,width,h);
-          X += width+15;
+          ctx.fillRect(X,canvas.height - 4*h,width,4*h);
+          X += width+50;
         }
 
       }
@@ -59,12 +59,13 @@
     <div align="center">
       <h1> Your Data </h1>
 
-      Enter the values separated by a comma<br>
+      Manually enter the values separated by a comma   <br>
+      (eventually will be taken in from local storage) <br>
       <input type="text" name="number" id="num"<br>
       <input type="button" value="submit" name="submit" onclick="draw()">
       <input type="button" value="Clear" name="Clear" onclick="reset()"><br><br>
     </br><br>
-      <canvas id="myCanvas" width="900" height="500"
+      <canvas id="myCanvas" width="850" height="450"
         style="border:1px solid #000000;">
       </canvas>
     </div>
