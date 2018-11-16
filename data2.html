@@ -43,6 +43,7 @@
       <!-- javavascript for bargraph -->
       <script src="barGraph.js"></script>
       <script>
+
       function BarGraph(ctx) {
 
         // Private properties and methods
@@ -261,16 +262,42 @@
         var ctx = canvas.getContext('2d');
         var graph = new BarGraph(ctx);
 
-
         //localStorage.setItem('hours', totalSleep);
         //localStorage.setItem('day', month+"/"+day);
+
+
+        var sleeplog = localStorage.getItem('hours');
+/*
+        if(localStorage.getItem("weekArray") === null){
+          let thisWeek = [0,0,0,0,0,0,0];
+          localStorage.setItem('weekArray',JSON.stringify(thisWeek));
+        }
+/*
+        else{
+          let thisWeek = JSON.parse(localStorage.getItem('weekArray'));
+        }
+*/
+        let thisWeek = localStorage.getItem('thisWeek') ? JSON.parse(localStorage.getItem('thisWeek')) : [0,0,0,0,0,0,0];
+
+        if(localStorage.getItem("day")===null){
+
+        }
+        else{
+          let now= localStorage.getItem('day');
+          thisWeek[now]=localStorage.getItem('hours');
+
+        }
 /*
 
-        if (localStorage.getItem('hourskey')) {
-          lsHourArr = JSON.parse(localStorage.getItem('hourskey'));
-        } else {
-          let lsHourArr = [];
-        }
+        localStorage.setItem('weekArray', thisWeek);
+
+        var test = localStorage.getItem('tester');
+        test++;
+        localStorage.setItem('tester',test);
+        document.write(test);
+/*
+
+
         localStorage.setItem('hourskey',JSON.stringify(lsHourArr);
         const data = JSON.parse(localStorage.getItem('hourskey'));
 
@@ -284,7 +311,7 @@
         //hoursArr=localStorage.getItem('sleptHoursArray');
 
       //  var hoursArr=lsHourArr;
-      var hoursArr= [1,2,3,4,5,6,7];
+      var hoursArr= thisWeek;
         switch(hoursArr.length){
           case 1:
             graph.margin = 300;

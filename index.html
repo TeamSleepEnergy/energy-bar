@@ -236,7 +236,7 @@
           }
           var totalSleep = Math.round((((sleptHours - carryover) * 60 + sleptMin)/60)*10)/10;
           localStorage.setItem('hours', totalSleep);
-          localStorage.setItem('day', month+"/"+day);
+          localStorage.setItem('day', date.getDay());
         }
 //reset bar and info
         function clearNight(){
