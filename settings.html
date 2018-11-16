@@ -124,6 +124,10 @@
     $(".a").fadeOut();
   }
 
+if(localStorage.getItem("Hours")===NULL){
+  localStorage.setItem("Hours")=8;
+}
+
 //form variables
 var feet = document.getElementById('feetinput');
 var inches = document.getElementById('inchinput');
