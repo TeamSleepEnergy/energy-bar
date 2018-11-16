@@ -285,7 +285,7 @@
         else{
           let now= localStorage.getItem('day');
           thisWeek[now]=localStorage.getItem('hours');
-
+          localStorage.setItem('thisWeek', JSON.stringify(thisWeek));
         }
 /*
 
