@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Page</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom side nav bar CSS -->
+    <link href="css/sidenav.css" rel="stylesheet">
+
+
+</head>
+
+<body>
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="index.html">Home</a>
+        <a href="data2.html">Data</a>
+        <a href="settings.html">Settings</a>
+        <text> ----------------------------------------------</text>
+        <a href= "login.html">Log out</a>
+    </div>
+    <span style="font-size:3em;cursor:pointer" onclick="openNav()">&#9776;</span>
+
+    <!-- Container for Jumbotron that contains graph with Data -->
+
+
+    <div align="center">
+      <h1> Your Data </h1>
+
+      <canvas id="canvasID" ></canvas>
+    </div>
+
+      <!-- javavascript for bargraph -->
+      <script src="barGraph.js"></script>
+      <script>
+      function BarGraph(ctx) {
+
+        // Private properties and methods
+
+        var that = this;
+        var startArr;
+        var endArr;
+        var looping = false;
+
+        // Loop method adjusts the height of bar and redraws if neccessary
+      	var loop = function () {
+
+      	  var delta;
+      	  var animationComplete = true;
+
+      	  // Boolean to prevent update function from looping if already looping
+      	  looping = true;
+
+      	  // For each bar
+      	  for (var i = 0; i < endArr.length; i += 1) {
+      		// Change the current bar height toward its target height
+      		delta = (endArr[i] - startArr[i]) / that.animationSteps;
+      		that.curArr[i] += delta;
+      		// If any change is made then flip a switch
+      		if (delta) {
+      		  animationComplete = false;
+      		}
+      	  }
+      	  // If no change was made to any bars then we are done
+      	  if (animationComplete) {
+      		looping = false;
+      	  } else {
+      		// Draw and call loop again
+      		draw(that.curArr);
+      		setTimeout(loop, that.animationInterval / that.animationSteps);
+      	  }
+      	};
+
+        // Draw method updates the canvas with the current display
+      	var draw = function (arr) {
+
+      	  var numOfBars = arr.length;
+      	  var barWidth;
+      	  var barHeight;
+      	  var border = 2;
+      	  var ratio;
+      	  var maxBarHeight;
+      	  var gradient;
+      	  var largestValue;
+      	  var graphAreaX = 0;
+      	  var graphAreaY = 0;
+      	  var graphAreaWidth = that.width;
+      	  var graphAreaHeight = that.height;
+      	  var i;
+
+      		// Update the dimensions of the canvas only if they have changed
+      	  if (ctx.canvas.width !== that.width || ctx.canvas.height !== that.height) {
+      		ctx.canvas.width = that.width;
+      		ctx.canvas.height = that.height;
+      	  }
+
+      	  // Draw the background color
+      	  ctx.fillStyle = that.backgroundColor;
+      	  ctx.fillRect(0, 0, that.width, that.height);
+
+      	  // If x axis labels exist then make room
+      	  if (that.xAxisLabelArr.length) {
+      		graphAreaHeight -= 40;
+      	  }
+
+      	  // Calculate dimensions of the bar
+      	  barWidth = graphAreaWidth / numOfBars - that.margin * 2;
+      	  maxBarHeight = graphAreaHeight - 25;
+
+      	  // Determine the largest value in the bar array
+      	  var largestValue = 0;
+      	  for (i = 0; i < arr.length; i += 1) {
+      		if (arr[i] > largestValue) {
+      		  largestValue = arr[i];
+      		}
+      	  }
+
+      	  // For each bar
+      	  for (i = 0; i < arr.length; i += 1) {
+      		// Set the ratio of current bar compared to the maximum
+      		if (that.maxValue) {
+      		  ratio = arr[i] / that.maxValue;
+      		} else {
+      		  ratio = arr[i] / largestValue;
+      		}
+
+      		barHeight = ratio * maxBarHeight;
+
+      		// Turn on shadow
+      		ctx.shadowOffsetX = 2;
+      		ctx.shadowOffsetY = 2;
+      		ctx.shadowBlur = 2;
+      		ctx.shadowColor = "#999";
+
+      		// Draw bar background
+      		ctx.fillStyle = "#333";
+      		ctx.fillRect(that.margin + i * that.width / numOfBars,
+      		  graphAreaHeight - barHeight,
+      		  barWidth,
+      		  barHeight);
+
+      		// Turn off shadow
+      		ctx.shadowOffsetX = 0;
+      		ctx.shadowOffsetY = 0;
+      		ctx.shadowBlur = 0;
+
+      		// Draw bar color if it is large enough to be visible
+      		if (barHeight > border * 2) {
+      			// Create gradient
+      			//gradient = ctx.createLinearGradient(0, 0, 0, graphAreaHeight);
+      			//gradient.addColorStop(1-ratio, that.colors[i % that.colors.length]);
+      			//gradient.addColorStop(1, "#ffffff");
+
+      		//	ctx.fillStyle = gradient;
+            ctx.fillStyle = "blue"
+            // Fill rectangle with gradient
+      			ctx.fillRect(that.margin + i * that.width / numOfBars + border,
+      			  graphAreaHeight - barHeight + border,
+      			  barWidth - border * 2,
+      			  barHeight - border * 2);
+      		}
+
+      		// Write bar value
+      		ctx.fillStyle = "#333";
+      		ctx.font = "bold 12px sans-serif";
+      		ctx.textAlign = "center";
+      		// Use try / catch to stop IE 8 from going to error town
+      		try {
+      		  ctx.fillText(parseInt(arr[i],10),
+      			i * that.width / numOfBars + (that.width / numOfBars) / 2,
+      			graphAreaHeight - barHeight - 10);
+      		} catch (ex) {}
+      		// Draw bar label if it exists
+      		if (that.xAxisLabelArr[i]) {
+      		  // Use try / catch to stop IE 8 from going to error town
+      		  ctx.fillStyle = "#333";
+      		  ctx.font = "bold 12px sans-serif";
+      		  ctx.textAlign = "center";
+      		  try{
+      			ctx.fillText(that.xAxisLabelArr[i],
+      			  i * that.width / numOfBars + (that.width / numOfBars) / 2,
+      			  that.height - 10);
+      			} catch (ex) {}
+      		  }
+      		}
+          //set up a y axis
+          if (that.yAxisLabelArr[0]) {
+            // Use try / catch to stop IE 8 from going to error town
+            ctx.fillStyle = "#333";
+            ctx.font = "bold 15px sans-serif";
+            ctx.textAlign = "center";
+
+            try{
+
+              ctx.save();
+               ctx.translate(12, 250);
+
+
+
+               ctx.rotate(-Math.PI/2);
+               ctx.textAlign = "center";
+               ctx.fillText(" Hours of Sleep", 0, 0);
+               ctx.restore();
+
+
+
+            } catch (ex) {}
+            }
+      	  };
+
+        // Public properties and methods
+
+        this.width = 300;
+        this.height = 150;
+        this.maxValue;
+        this.margin = 5;
+        //this.colors = ["purple", "red", "green", "yellow"];
+        this.colors = ["blue"];
+        this.curArr = [];
+        this.backgroundColor = "#fff";
+        this.xAxisLabelArr = [];
+        this.yAxisLabelArr = [];
+        this.animationInterval = 100;
+        this.animationSteps = 10;
+
+        // Update method sets the end bar array and starts the animation
+      	this.update = function (newArr) {
+
+      	  // If length of target and current array is different
+      	  if (that.curArr.length !== newArr.length) {
+      		that.curArr = newArr;
+      		draw(newArr);
+      	  } else {
+      		// Set the starting array to the current array
+      		startArr = that.curArr;
+      		// Set the target array to the new array
+      		endArr = newArr;
+      		// Animate from the start array to the end array
+      		if (!looping) {
+      		  loop();
+      		}
+      	  }
+      	};
+      }
+
+
+
+
+        var canvas = document.getElementById('canvasID');
+        var ctx = canvas.getContext('2d');
+        var graph = new BarGraph(ctx);
+
+
+        graph.margin = 22;
+        graph.width = 800;
+        graph.height = 500;
+        graph.xAxisLabelArr = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+        graph.yAxisLabelArr = ["Hours of Sleep"];
+        graph.update([3, 5, 3, 4, 4, 8, 5]);
+
+
+        //for the y axis
+        ctx.beginPath();
+        ctx.moveTo(18, 0);
+        ctx.lineTo(18, 495);
+        ctx.stroke();
+
+        //for the x axis
+        ctx.beginPath();
+        ctx.moveTo(0, 475);
+        ctx.lineTo(790, 475);
+        ctx.stroke();
+
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- JavaScript for side nav bar functionality -->
+    <script src="js/sidenav.js"></script>
+</body>
+
+</html>
