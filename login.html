@@ -56,6 +56,11 @@
   <script src="js/bootstrap.min.js"></script>
   <!-- JavaScript to activate showing password; password hidden by default -->
   <script>
+  //initialize 'running' to 0
+  localStorage.setItem("running", 0);
+  //initialize default hours slept to 8
+  localStorage.setItem("Hours", 8);
+
   //show pw function
     function showPassword() {
       var x = document.getElementById("Userpassword");

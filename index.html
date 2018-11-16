@@ -346,7 +346,7 @@ var percRemain
                 var carryover = 0;
             }
             var totalSleep = (sleptHours - carryover) * 60 + sleptMin;
-            var current_progress = (totalSleep / 480) * 100;
+            var current_progress = (totalSleep / (parseInt(localStorage.getItem("Hours"))*60))*100;
             document.getElementById("percent").innerHTML = "Energy: "+Math.round(current_progress*10)/10+"%";
           }
 
@@ -405,7 +405,7 @@ var interval;
                   var carryover = 0;
               }
               var totalSleep = (sleptHours - carryover) * 60 + sleptMin;
-              var current_progress = (totalSleep / 480) * 100;
+              var current_progress = (totalSleep / (parseInt(localStorage.getItem("Hours"))*60))*100;
 
               /*$("#bar").css("width", current_progress + "%")
                 current_progress -= 1; //*/
