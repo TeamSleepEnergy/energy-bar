@@ -7,6 +7,7 @@
     <title>Data Page</title>
 
     <!-- Bootstrap -->
+    <link href="css/data2.css" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom side nav bar CSS -->
     <link href="css/sidenav.css" rel="stylesheet">
@@ -29,7 +30,9 @@
 
 
     <div align="center">
-      <h1> Your Data </h1>
+      <h1 class="headline"> Your Data </h1>
+      
+      <br><br>
 
       <canvas id="canvasID" ></canvas>
     </div>
@@ -171,7 +174,7 @@
       		ctx.textAlign = "center";
       		// Use try / catch to stop IE 8 from going to error town
       		try {
-      		  ctx.fillText(parseInt(arr[i],10),
+      		  ctx.fillText(parseFloat(arr[i],10),
       			i * that.width / numOfBars + (that.width / numOfBars) / 2,
       			graphAreaHeight - barHeight - 10);
       		} catch (ex) {}
@@ -258,7 +261,7 @@
 
 
 
-        var hoursArr = [2,3,7,4,8,1,7]
+        var hoursArr = [2,3,7,7.5,8,1,7]
         switch(hoursArr.length){
           case 1:
             graph.margin = 300;
@@ -295,6 +298,7 @@
         ctx.moveTo(0, 475);
         ctx.lineTo(790, 475);
         ctx.stroke();
+
 
     </script>
 
