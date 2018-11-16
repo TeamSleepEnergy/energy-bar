@@ -182,6 +182,9 @@
 
     <!--Energy bar related functions-->
     <script>
+    if(localStorage.getItem("Hours")===NULL){
+      localStorage.setItem("Hours", 8);
+    }
 
 //'data recorded' popup
         function savePopup(){

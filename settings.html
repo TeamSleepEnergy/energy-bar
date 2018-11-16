@@ -84,7 +84,7 @@
     </div>
     <div class="form-group">
       <label for="exampleFormControlSelect1">Usual Amount of Sleep (Hours)</label>
-      <select class="form-control" id="hoursinput">
+      <select class="form-control" value = "" id="hoursinput">
         <option>3</option>
         <option>4</option>
         <option>5</option>
@@ -124,9 +124,6 @@
     $(".a").fadeOut();
   }
 
-if(localStorage.getItem("Hours")===NULL){
-  localStorage.setItem("Hours", 8);
-}
 
 //form variables
 var feet = document.getElementById('feetinput');
