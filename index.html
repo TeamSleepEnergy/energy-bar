@@ -47,6 +47,11 @@
             });
         });
     </script>
+    <style>
+    b.datapopup{
+      display: none;
+    }
+    </style>
 </head>
 
 <body>
@@ -120,7 +125,7 @@
                     </select>
                 </div>
                 <div class="col-sm-2" align="left">
-                    <button id="setButton" type="button" class="btn" onclick="initBar(); updateTime(); updatePercent();">Set</button>
+                    <button id="setButton" type="button" class="btn">Set</button>
                 </div>
             </div>
         </div>
@@ -140,7 +145,8 @@
     <b id="timeRemain"><font size="2">Time Remaining:</font></b>
     &nbsp;
     &nbsp;
-    <button id ="gotosleep" type="button" class="btn" onclick ="sleepytime();">Going to Sleep!</button>
+    <button id ="gotosleep" type="button" class="btn" onclick ="sleepytime(); savePopup(); clearNight();">Going to Sleep!</button>
+    <b class="datapopup">Data Recorded!</b>
     <br></br>
     <b id="percent"><font size="2">Energy:</font></b>
       </div>
@@ -176,8 +182,28 @@
 
     <!--Energy bar related functions-->
     <script>
-        var energyBar = document.getElementById("bar");
 
+//'data recorded' popup
+        function savePopup(){
+          $(".datapopup").fadeIn();
+          $(".datapopup").fadeOut();
+        }
+//check to see if bar is already running
+        $('#setButton').click(function(){
+          localStorage.setItem("running", 1);
+        });
+
+        $('#gotosleep').click(function(){
+          localStorage.setItem("running", 0);
+        });
+
+        if(localStorage.getItem("running")==1){
+          var tRemain = setInterval(updateTime(), 300);
+          var percRemain = setInterval(updatePercent(), 300);
+          var interval = setInterval(initBar(), 300);
+        }
+
+//record data
         function sleepytime(){
           var date = new Date();
           var hour = date.getHours();
@@ -212,10 +238,24 @@
           localStorage.setItem('hours', totalSleep);
           localStorage.setItem('day', month+"/"+day);
         }
+//reset bar and info
+        function clearNight(){
+          $("#bar").css("width", 0 + "%")
+          .attr("aria-valuenow", 0)
+          document.getElementById("timeRemain").innerHTML = "Time Remaining: "
+          document.getElementById("percent").innerHTML = "Energy: "
+        }
 
+//Time remaining related functions
+        $('#setButton').click(function(){
+          var tRemain = setInterval(updateTime(), 300);
+        });
+
+        $('#gotosleep').click(function(){
+          clearInterval(tRemain);
+        });
 
         function updateTime(){
-          var tRemaining = setInterval(function(){
             var date = new Date();
             var hour = date.getHours();
             var min = date.getMinutes();
@@ -245,12 +285,20 @@
             }
             sleptHours = sleptHours - carryover;
             document.getElementById("timeRemain").innerHTML = "Time Remaining: " + sleptHours+ " hours " +sleptMin+" minutes " ;
-          }, 300);
+          }
 
-        }
+
+//percent related functions
+
+        $('#setButton').click(function(){
+          var percRemain = setInterval(updatePercent(), 300);
+        });
+
+        $('#gotosleep').click(function(){
+          clearInterval(percRemain);
+        });
 
         function updatePercent(){
-          var percent = setInterval(function(){
             var date = new Date();
             var hour = date.getHours();
             var min = date.getMinutes();
@@ -281,9 +329,17 @@
             var totalSleep = (sleptHours - carryover) * 60 + sleptMin;
             var current_progress = (totalSleep / 480) * 100;
             document.getElementById("percent").innerHTML = "Energy: "+Math.round(current_progress*10)/10+"%";
-          }, 300);
+          }
 
-        }
+
+//initBar related functions
+        $('#setButton').click(function(){
+          var interval = setInterval(initBar(), 300);
+        });
+
+        $('#gotosleep').click(function(){
+          clearInterval(interval);
+        });
 
         function initBar() {
             //id.style.width = "100%";
@@ -293,7 +349,7 @@
             /*$("#bar").css("width", 100 + "%");
             $("#bar").attr("aria-valuenow", "100");*/
 
-            var interval = setInterval(function () {
+
               var date = new Date();
               var hour = date.getHours();
               var min = date.getMinutes();
@@ -329,8 +385,9 @@
                 //.text(current_progress + "% Complete");
                 if (current_progress <= 0)
                     clearInterval(interval);
-            }, 300); //scale this to wake up time*/
-        }
+
+            } //scale this to wake up time*/
+
 
         /*       $(function () {
                     $("#bar").css("width", 100 + "%");
