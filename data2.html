@@ -31,8 +31,11 @@
 
     <div align="center">
       <h1 class="headline"> Your Data </h1>
-      
+
       <br><br>
+
+
+
 
       <canvas id="canvasID" ></canvas>
     </div>
@@ -254,14 +257,34 @@
 
 
 
-
         var canvas = document.getElementById('canvasID');
         var ctx = canvas.getContext('2d');
         var graph = new BarGraph(ctx);
 
 
+        //localStorage.setItem('hours', totalSleep);
+        //localStorage.setItem('day', month+"/"+day);
+/*
 
-        var hoursArr = [2,3,7,7.5,8,1,7]
+        if (localStorage.getItem('hourskey')) {
+          lsHourArr = JSON.parse(localStorage.getItem('hourskey'));
+        } else {
+          let lsHourArr = [];
+        }
+        localStorage.setItem('hourskey',JSON.stringify(lsHourArr);
+        const data = JSON.parse(localStorage.getItem('hourskey'));
+
+
+        var slepthours =localStorage.getItem('hours');
+
+        lsHourArr.push(slepthours);
+        localStorage.setItem('hourskey',JSON.stringify(lsHourArr);
+*/
+        //localStorage.setItem('sleptHoursArray', hoursArr);
+        //hoursArr=localStorage.getItem('sleptHoursArray');
+
+      //  var hoursArr=lsHourArr;
+      var hoursArr= [1,2,3,4,5,6,7];
         switch(hoursArr.length){
           case 1:
             graph.margin = 300;
