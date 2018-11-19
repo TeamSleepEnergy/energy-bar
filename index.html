@@ -20,7 +20,7 @@
     <link href="css/bootstrap-timepicker.min.css">
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- Popper (necessary for Bootstrap's Popover functionality) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -48,7 +48,7 @@
         });
     </script>
     <style>
-    b.datapopup{
+        b.datapopup{
       display: none;
     }
     </style>
@@ -141,15 +141,20 @@
             $('#timepicker1').timepicker();
         </script>
 -->
-  <div class ="container" align="center">
-    <b id="timeRemain"><font size="2">Time Remaining:</font></b>
-    &nbsp;
-    &nbsp;
-    <button id ="gotosleep" type="button" class="btn" onclick ="sleepytime(); savePopup(); clearNight();">Going to Sleep!</button>
-    <b class="datapopup">Data Recorded!</b>
-    <br></br>
-    <b id="percent"><font size="2">Energy:</font></b>
-      </div>
+    <div class="container" align="center">
+        <b id="timeRemain">
+            <font size="2">Time Remaining:</font>
+        </b>
+        &nbsp;
+        &nbsp;
+        <button id="gotosleep" type="button" class="btn" onclick="sleepytime(); savePopup(); clearNight();">Going to
+            Sleep!</button>
+        <b class="datapopup">Data Recorded!</b>
+        <br></br>
+        <b id="percent">
+            <font size="2">Energy:</font>
+        </b>
+    </div>
     <div class="container" align="right">
         <!-- Health eff:ects popover -->
         <a rel="popover" tabindex="0" class="btn btn-lg btn-info" role="button" data-toggle="popover" data-trigger="focus"
@@ -182,81 +187,79 @@
 
     <!--Energy bar related functions-->
     <script>
-
-//'data recorded' popup
-        function savePopup(){
-          $(".datapopup").fadeIn();
-          $(".datapopup").fadeOut();
+        //'data recorded' popup
+        function savePopup() {
+            $(".datapopup").fadeIn();
+            $(".datapopup").fadeOut();
         }
-//check to see if bar is already running
-        $('#setButton').click(function(){
-          localStorage.setItem("running", 1);
+        //check to see if bar is already running
+        $('#setButton').click(function () {
+            localStorage.setItem("running", 1);
         });
 
-        $('#gotosleep').click(function(){
-          localStorage.setItem("running", 0);
+        $('#gotosleep').click(function () {
+            localStorage.setItem("running", 0);
         });
 
-        if(localStorage.getItem("running")==1){
-           tRemain = setInterval(updateTime, 300);
-           percRemain = setInterval(updatePercent, 300);
-           interval = setInterval(initBar, 300);
+        if (localStorage.getItem("running") == 1) {
+            tRemain = setInterval(updateTime, 300);
+            percRemain = setInterval(updatePercent, 300);
+            interval = setInterval(initBar, 300);
         }
 
-//record data
-        function sleepytime(){
-          var date = new Date();
-          var hour = date.getHours();
-          var min = date.getMinutes();
-          var month = date.getMonth()+1;
-          var day = date.getDate();
-          var dropDown = document.getElementById("UserInput");
-          var wakeUpString = dropDown.options[dropDown.selectedIndex].text;
-          var wakeHour = Number(wakeUpString.charAt(0) + wakeUpString.charAt(1));
-          var wakeMin = Number(wakeUpString.charAt(3) + wakeUpString.charAt(4));
-          var pmCheck = wakeUpString.charAt(6);
-          var sleptHours = 0;
-          Math.abs((24 - hour) + wakeHour);
-          if (pmCheck == "P" && hour != 12) {
-              wakeHour += 12;
-          }
-          if (hour > wakeHour) {
-              sleptHours = 24 - hour + wakeHour;
+        //record data
+        function sleepytime() {
+            var date = new Date();
+            var hour = date.getHours();
+            var min = date.getMinutes();
+            var month = date.getMonth() + 1;
+            var day = date.getDate();
+            var dropDown = document.getElementById("UserInput");
+            var wakeUpString = dropDown.options[dropDown.selectedIndex].text;
+            var wakeHour = Number(wakeUpString.charAt(0) + wakeUpString.charAt(1));
+            var wakeMin = Number(wakeUpString.charAt(3) + wakeUpString.charAt(4));
+            var pmCheck = wakeUpString.charAt(6);
+            var sleptHours = 0;
+            Math.abs((24 - hour) + wakeHour);
+            if (pmCheck == "P" && hour != 12) {
+                wakeHour += 12;
+            }
+            if (hour > wakeHour) {
+                sleptHours = 24 - hour + wakeHour;
 
-          } else if (hour < wakeHour) {
-              sleptHours = wakeHour - hour;
+            } else if (hour < wakeHour) {
+                sleptHours = wakeHour - hour;
 
-          }
-          var sleptMin = Math.abs((60 - min) - wakeMin);
-          if (min > wakeMin) {
-              var carryover = 1;
-          }
-           else {
-              var carryover = 0;
-          }
-          var totalSleep = Math.round((((sleptHours - carryover) * 60 + sleptMin)/60)*10)/10;
-          localStorage.setItem('hours', totalSleep);
-          localStorage.setItem('day', date.getDay());
+            }
+            var sleptMin = Math.abs((60 - min) - wakeMin);
+            if (min > wakeMin) {
+                var carryover = 1;
+            } else {
+                var carryover = 0;
+            }
+            var totalSleep = Math.round((((sleptHours - carryover) * 60 + sleptMin) / 60) * 10) / 10;
+            localStorage.setItem('hours', totalSleep);
+            localStorage.setItem('day', date.getDay());
         }
-//reset bar and info
-        function clearNight(){
-          $("#bar").css("width", 0 + "%")
-          .attr("aria-valuenow", 0)
-          document.getElementById("timeRemain").innerHTML = "Time Remaining: "
-          document.getElementById("percent").innerHTML = "Energy: "
+        //reset bar and info
+        function clearNight() {
+            $("#bar").css("width", 0 + "%")
+                .attr("aria-valuenow", 0)
+            document.getElementById("timeRemain").innerHTML = "Time Remaining: "
+            document.getElementById("percent").innerHTML = "Energy: "
         }
 
-//Time remaining related functions
-var tRemain
-        $('#setButton').click(function(){
-          tRemain = setInterval(updateTime, 300);
+        //Time remaining related functions
+        var tRemain
+        $('#setButton').click(function () {
+            tRemain = setInterval(updateTime, 300);
         })
 
-        $('#gotosleep').click(function(){
-          clearInterval(tRemain);
+        $('#gotosleep').click(function () {
+            clearInterval(tRemain);
         })
 
-      /*  function timeInterval(){
+        /*  function timeInterval(){
           var tRemain = setInterval(updateTime,300);
           return tRemain;
         }
@@ -265,7 +268,7 @@ var tRemain
           clearInterval(tRemain);
        }
 */
-        function updateTime(){
+        function updateTime() {
             var date = new Date();
             var hour = date.getHours();
             var min = date.getMinutes();
@@ -289,35 +292,35 @@ var tRemain
             var sleptMin = Math.abs((60 - min) - wakeMin);
             if (min > wakeMin) {
                 var carryover = 1;
-            }
-             else {
+            } else {
                 var carryover = 0;
             }
             sleptHours = sleptHours - carryover;
-            document.getElementById("timeRemain").innerHTML = "Time Remaining: " + sleptHours+ " hours " +sleptMin+" minutes " ;
-          }
-
-
-//percent related functions
-var percRemain
-        $('#setButton').click(function(){
-           percRemain = setInterval(updatePercent, 300);
-        })
-
-        $('#gotosleep').click(function(){
-          clearInterval(percRemain);
-        })
-/*
-        function percInterval(){
-           var percRemain = setInterval(updatePercent,300);
-           return percRemain;
+            document.getElementById("timeRemain").innerHTML = "Time Remaining: " + sleptHours + " hours " + sleptMin +
+                " minutes ";
         }
 
-        function percClear(){
-          clearInterval(percRemain);
-        }
-*/
-      function updatePercent(){
+
+        //percent related functions
+        var percRemain
+        $('#setButton').click(function () {
+            percRemain = setInterval(updatePercent, 300);
+        })
+
+        $('#gotosleep').click(function () {
+            clearInterval(percRemain);
+        })
+        /*
+                function percInterval(){
+                   var percRemain = setInterval(updatePercent,300);
+                   return percRemain;
+                }
+
+                function percClear(){
+                  clearInterval(percRemain);
+                }
+        */
+        function updatePercent() {
             var date = new Date();
             var hour = date.getHours();
             var min = date.getMinutes();
@@ -341,25 +344,24 @@ var percRemain
             var sleptMin = Math.abs((60 - min) - wakeMin);
             if (min > wakeMin) {
                 var carryover = 1;
-            }
-             else {
+            } else {
                 var carryover = 0;
             }
             var totalSleep = (sleptHours - carryover) * 60 + sleptMin;
-            var current_progress = (totalSleep/ 480)*100;
+            var current_progress = (totalSleep / 480) * 100;
             //var current_progress = (totalSleep / (parseInt(localStorage.getItem("Hours"))*60))*100;
-            document.getElementById("percent").innerHTML = "Energy: "+Math.round(current_progress*10)/10+"%";
-          }
+            document.getElementById("percent").innerHTML = "Energy: " + Math.round(current_progress * 10) / 10 + "%";
+        }
 
 
-//initBar related functions
-var interval;
-        $('#setButton').click(function(){
-          interval = setInterval(initBar, 300);
+        //initBar related functions
+        var interval;
+        $('#setButton').click(function () {
+            interval = setInterval(initBar, 300);
         })
 
-        $('#gotosleep').click(function(){
-          clearInterval(interval);
+        $('#gotosleep').click(function () {
+            clearInterval(interval);
         })
         /*
         function barInterval(){
@@ -380,44 +382,44 @@ var interval;
             $("#bar").attr("aria-valuenow", "100");*/
 
 
-              var date = new Date();
-              var hour = date.getHours();
-              var min = date.getMinutes();
-              var dropDown = document.getElementById("UserInput");
-              var wakeUpString = dropDown.options[dropDown.selectedIndex].text;
-              var wakeHour = Number(wakeUpString.charAt(0) + wakeUpString.charAt(1));
-              var wakeMin = Number(wakeUpString.charAt(3) + wakeUpString.charAt(4));
-              var pmCheck = wakeUpString.charAt(6);
-              var sleptHours = 0; /*Math.abs((24 - hour) + wakeHour);*/
-              if (pmCheck == "P" && hour != 12) {
-                  wakeHour += 12;
-              }
-              if (hour > wakeHour) {
-                  sleptHours = 24 - hour + wakeHour;
+            var date = new Date();
+            var hour = date.getHours();
+            var min = date.getMinutes();
+            var dropDown = document.getElementById("UserInput");
+            var wakeUpString = dropDown.options[dropDown.selectedIndex].text;
+            var wakeHour = Number(wakeUpString.charAt(0) + wakeUpString.charAt(1));
+            var wakeMin = Number(wakeUpString.charAt(3) + wakeUpString.charAt(4));
+            var pmCheck = wakeUpString.charAt(6);
+            var sleptHours = 0; /*Math.abs((24 - hour) + wakeHour);*/
+            if (pmCheck == "P" && hour != 12) {
+                wakeHour += 12;
+            }
+            if (hour > wakeHour) {
+                sleptHours = 24 - hour + wakeHour;
 
-              } else if (hour < wakeHour) {
-                  sleptHours = wakeHour - hour;
+            } else if (hour < wakeHour) {
+                sleptHours = wakeHour - hour;
 
-              }
-              var sleptMin = Math.abs((60 - min) - wakeMin);
-              if (min > wakeMin) {
-                  var carryover = 1;
-              } else {
-                  var carryover = 0;
-              }
-              var totalSleep = (sleptHours - carryover) * 60 + sleptMin;
-              var current_progress = (totalSleep/ 480)*100;
-              //var current_progress = (totalSleep / (parseInt(localStorage.getItem("Hours"))*60))*100;
+            }
+            var sleptMin = Math.abs((60 - min) - wakeMin);
+            if (min > wakeMin) {
+                var carryover = 1;
+            } else {
+                var carryover = 0;
+            }
+            var totalSleep = (sleptHours - carryover) * 60 + sleptMin;
+            var current_progress = (totalSleep / 480) * 100;
+            //var current_progress = (totalSleep / (parseInt(localStorage.getItem("Hours"))*60))*100;
 
-              /*$("#bar").css("width", current_progress + "%")
-                current_progress -= 1; //*/
-               $("#bar").css("width", current_progress + "%")
+            /*$("#bar").css("width", current_progress + "%")
+              current_progress -= 1; //*/
+            $("#bar").css("width", current_progress + "%")
                 .attr("aria-valuenow", current_progress)
-                //.text(current_progress + "% Complete");
-                if (current_progress <= 0)
-                    clearInterval(interval);
+            //.text(current_progress + "% Complete");
+            if (current_progress <= 0)
+                clearInterval(interval);
 
-            } //scale this to wake up time*/
+        } //scale this to wake up time*/
 
         /*       $(function () {
                     $("#bar").css("width", 100 + "%");
@@ -449,7 +451,8 @@ var interval;
             $('[rel="popover"]').popover({
                 html: true,
                 content: function () {
-                    var content = $($(this).data('popover-content')).clone(true).removeClass('hidden');
+                    var content = $($(this).data('popover-content')).clone(true).removeClass(
+                        'hidden');
                     return content;
                 }
             }).click(function (e) {
@@ -457,6 +460,7 @@ var interval;
             });
         });
     </script>
+    
 </body>
 
 </html>

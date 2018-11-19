@@ -2,372 +2,339 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Page</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Page</title>
 
-    <!-- Bootstrap -->
-    <link href="css/data2.css" rel="stylesheet">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom side nav bar CSS -->
-    <link href="css/sidenav.css" rel="stylesheet">
+  <!-- Bootstrap -->
+  <link href="css/data2.css" rel="stylesheet">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom side nav bar CSS -->
+  <link href="css/sidenav.css" rel="stylesheet">
 
 
 </head>
 
 <body>
-    <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="index.html">Home</a>
-        <a href="data2.html">Data</a>
-        <a href="settings.html">Settings</a>
-        <text> ----------------------------------------------</text>
-        <a href= "login.html">Log out</a>
-    </div>
-    <span style="font-size:3em;cursor:pointer" onclick="openNav()">&#9776;</span>
+  <div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="index.html">Home</a>
+    <a href="data2.html">Data</a>
+    <a href="settings.html">Settings</a>
+    <text> ----------------------------------------------</text>
+    <a href="login.html">Log out</a>
+  </div>
+  <span style="font-size:3.7em;cursor:pointer;position:absolute;top:3%;left:1.5%" onclick="openNav()">&#9776;</span></span>
 
-    <!-- Container for Jumbotron that contains graph with Data -->
+  <!-- Container for Jumbotron that contains graph with Data -->
+  <div align="center">
+    <h1 class="headline"> Your Data </h1>
+    <br><br>
+    <canvas id="canvasID"></canvas>
+  </div>
 
+  <!-- javavascript for bargraph -->
+  <script src="barGraph.js"></script>
+  <script>
+    function BarGraph(ctx) {
 
-    <div align="center">
-      <h1 class="headline"> Your Data </h1>
+      // Private properties and methods
 
-      <br><br>
+      var that = this;
+      var startArr;
+      var endArr;
+      var looping = false;
 
+      // Loop method adjusts the height of bar and redraws if neccessary
+      var loop = function () {
 
+        var delta;
+        var animationComplete = true;
 
+        // Boolean to prevent update function from looping if already looping
+        looping = true;
 
-      <canvas id="canvasID" ></canvas>
-    </div>
+        // For each bar
+        for (var i = 0; i < endArr.length; i += 1) {
+          // Change the current bar height toward its target height
+          delta = (endArr[i] - startArr[i]) / that.animationSteps;
+          that.curArr[i] += delta;
+          // If any change is made then flip a switch
+          if (delta) {
+            animationComplete = false;
+          }
+        }
+        // If no change was made to any bars then we are done
+        if (animationComplete) {
+          looping = false;
+        } else {
+          // Draw and call loop again
+          draw(that.curArr);
+          setTimeout(loop, that.animationInterval / that.animationSteps);
+        }
+      };
 
-      <!-- javavascript for bargraph -->
-      <script src="barGraph.js"></script>
-      <script>
+      // Draw method updates the canvas with the current display
+      var draw = function (arr) {
+        var numOfBars = arr.length;
+        var barWidth;
+        var barHeight;
+        var border = 2;
+        var ratio;
+        var maxBarHeight;
+        var gradient;
+        var largestValue;
+        var graphAreaX = 0;
+        var graphAreaY = 0;
+        var graphAreaWidth = that.width;
+        var graphAreaHeight = that.height;
+        var i;
 
-      function BarGraph(ctx) {
+        // Update the dimensions of the canvas only if they have changed
+        if (ctx.canvas.width !== that.width || ctx.canvas.height !== that.height) {
+          ctx.canvas.width = that.width;
+          ctx.canvas.height = that.height;
+        }
 
-        // Private properties and methods
+        // Draw the background color
+        ctx.fillStyle = that.backgroundColor;
+        ctx.fillRect(0, 0, that.width, that.height);
 
-        var that = this;
-        var startArr;
-        var endArr;
-        var looping = false;
+        // If x axis labels exist then make room
+        if (that.xAxisLabelArr.length) {
+          graphAreaHeight -= 40;
+        }
 
-        // Loop method adjusts the height of bar and redraws if neccessary
-      	var loop = function () {
+        // Calculate dimensions of the bar
+        barWidth = graphAreaWidth / numOfBars - that.margin * 2;
+        maxBarHeight = graphAreaHeight - 25;
 
-      	  var delta;
-      	  var animationComplete = true;
+        // Determine the largest value in the bar array
+        var largestValue = 0;
+        for (i = 0; i < arr.length; i += 1) {
+          if (arr[i] > largestValue) {
+            largestValue = arr[i];
+          }
+        }
 
-      	  // Boolean to prevent update function from looping if already looping
-      	  looping = true;
+        // For each bar
+        for (i = 0; i < arr.length; i += 1) {
+          // Set the ratio of current bar compared to the maximum
+          if (that.maxValue) {
+            ratio = arr[i] / that.maxValue;
+          } else {
+            ratio = arr[i] / largestValue;
+          }
 
-      	  // For each bar
-      	  for (var i = 0; i < endArr.length; i += 1) {
-      		// Change the current bar height toward its target height
-      		delta = (endArr[i] - startArr[i]) / that.animationSteps;
-      		that.curArr[i] += delta;
-      		// If any change is made then flip a switch
-      		if (delta) {
-      		  animationComplete = false;
-      		}
-      	  }
-      	  // If no change was made to any bars then we are done
-      	  if (animationComplete) {
-      		looping = false;
-      	  } else {
-      		// Draw and call loop again
-      		draw(that.curArr);
-      		setTimeout(loop, that.animationInterval / that.animationSteps);
-      	  }
-      	};
+          barHeight = ratio * maxBarHeight;
 
-        // Draw method updates the canvas with the current display
-      	var draw = function (arr) {
+          // Turn on shadow
+          ctx.shadowOffsetX = 2;
+          ctx.shadowOffsetY = 2;
+          ctx.shadowBlur = 2;
+          ctx.shadowColor = "#999";
 
-      	  var numOfBars = arr.length;
-      	  var barWidth;
-      	  var barHeight;
-      	  var border = 2;
-      	  var ratio;
-      	  var maxBarHeight;
-      	  var gradient;
-      	  var largestValue;
-      	  var graphAreaX = 0;
-      	  var graphAreaY = 0;
-      	  var graphAreaWidth = that.width;
-      	  var graphAreaHeight = that.height;
-      	  var i;
-
-      		// Update the dimensions of the canvas only if they have changed
-      	  if (ctx.canvas.width !== that.width || ctx.canvas.height !== that.height) {
-      		ctx.canvas.width = that.width;
-      		ctx.canvas.height = that.height;
-      	  }
-
-      	  // Draw the background color
-      	  ctx.fillStyle = that.backgroundColor;
-      	  ctx.fillRect(0, 0, that.width, that.height);
-
-      	  // If x axis labels exist then make room
-      	  if (that.xAxisLabelArr.length) {
-      		graphAreaHeight -= 40;
-      	  }
-
-      	  // Calculate dimensions of the bar
-      	  barWidth = graphAreaWidth / numOfBars - that.margin * 2;
-      	  maxBarHeight = graphAreaHeight - 25;
-
-      	  // Determine the largest value in the bar array
-      	  var largestValue = 0;
-      	  for (i = 0; i < arr.length; i += 1) {
-      		if (arr[i] > largestValue) {
-      		  largestValue = arr[i];
-      		}
-      	  }
-
-      	  // For each bar
-      	  for (i = 0; i < arr.length; i += 1) {
-      		// Set the ratio of current bar compared to the maximum
-      		if (that.maxValue) {
-      		  ratio = arr[i] / that.maxValue;
-      		} else {
-      		  ratio = arr[i] / largestValue;
-      		}
-
-      		barHeight = ratio * maxBarHeight;
-
-      		// Turn on shadow
-      		ctx.shadowOffsetX = 2;
-      		ctx.shadowOffsetY = 2;
-      		ctx.shadowBlur = 2;
-      		ctx.shadowColor = "#999";
-
-      		// Draw bar background
-      		ctx.fillStyle = "#333";
-      		ctx.fillRect(5+that.margin + i * that.width / numOfBars,
-      		  graphAreaHeight - barHeight,
-      		  barWidth,
-      		  barHeight);
+          // Draw bar background
+          ctx.fillStyle = "#333";
+          ctx.fillRect(5 + that.margin + i * that.width / numOfBars,
+            graphAreaHeight - barHeight,
+            barWidth,
+            barHeight);
 
 
-      		// Turn off shadow
-      		ctx.shadowOffsetX = 0;
-      		ctx.shadowOffsetY = 0;
-      		ctx.shadowBlur = 0;
+          // Turn off shadow
+          ctx.shadowOffsetX = 0;
+          ctx.shadowOffsetY = 0;
+          ctx.shadowBlur = 0;
 
-      		// Draw bar color if it is large enough to be visible
-      		if (barHeight > border * 2) {
-      			// Create gradient
-      			//gradient = ctx.createLinearGradient(0, 0, 0, graphAreaHeight);
-      			//gradient.addColorStop(1-ratio, that.colors[i % that.colors.length]);
-      			//gradient.addColorStop(1, "#ffffff");
+          // Draw bar color if it is large enough to be visible
+          if (barHeight > border * 2) {
+            // Create gradient
+            //gradient = ctx.createLinearGradient(0, 0, 0, graphAreaHeight);
+            //gradient.addColorStop(1-ratio, that.colors[i % that.colors.length]);
+            //gradient.addColorStop(1, "#ffffff");
 
-      		//	ctx.fillStyle = gradient;
+            //	ctx.fillStyle = gradient;
             ctx.fillStyle = "blue"
             // Fill rectangle with gradient
-      			ctx.fillRect(5+that.margin + i * that.width / numOfBars + border,
-      			  graphAreaHeight - barHeight + border,
-      			  barWidth - border * 2,
-      			  barHeight - border * 2);
-      		}
+            ctx.fillRect(5 + that.margin + i * that.width / numOfBars + border,
+              graphAreaHeight - barHeight + border,
+              barWidth - border * 2,
+              barHeight - border * 2);
+          }
 
-      		// Write bar value
-      		ctx.fillStyle = "#333";
-      		ctx.font = "bold 12px sans-serif";
-      		ctx.textAlign = "center";
-      		// Use try / catch to stop IE 8 from going to error town
-      		try {
-      		  ctx.fillText(parseFloat(arr[i],10),
-      			i * that.width / numOfBars + (that.width / numOfBars) / 2,
-      			graphAreaHeight - barHeight - 10);
-      		} catch (ex) {}
-      		// Draw bar label if it exists
-      		if (that.xAxisLabelArr[i]) {
-      		  // Use try / catch to stop IE 8 from going to error town
-      		  ctx.fillStyle = "#333";
-      		  ctx.font = "bold 12px sans-serif";
-      		  ctx.textAlign = "center";
-      		  try{
-      			ctx.fillText(that.xAxisLabelArr[i],
-      			  2+i * that.width / numOfBars + (that.width / numOfBars) / 2,
-      			  that.height - 10);
-      			} catch (ex) {}
-      		  }
-      		}
-
-          //set up a y axis
-          if (that.yAxisLabelArr[0]) {
+          // Write bar value
+          ctx.fillStyle = "#333";
+          ctx.font = "bold 12px sans-serif";
+          ctx.textAlign = "center";
+          // Use try / catch to stop IE 8 from going to error town
+          try {
+            ctx.fillText(parseFloat(arr[i], 10),
+              i * that.width / numOfBars + (that.width / numOfBars) / 2,
+              graphAreaHeight - barHeight - 10);
+          } catch (ex) {}
+          // Draw bar label if it exists
+          if (that.xAxisLabelArr[i]) {
             // Use try / catch to stop IE 8 from going to error town
             ctx.fillStyle = "#333";
-            ctx.font = "bold 16px sans-serif";
+            ctx.font = "bold 12px sans-serif";
             ctx.textAlign = "center";
-
-            try{
-
-              ctx.save();
-               ctx.translate(12, 250);
-
-
-
-               ctx.rotate(-Math.PI/2);
-               ctx.textAlign = "center";
-               ctx.fillText(" Hours of Sleep", 0, 0);
-               ctx.restore();
-
-
-
+            try {
+              ctx.fillText(that.xAxisLabelArr[i],
+                2 + i * that.width / numOfBars + (that.width / numOfBars) / 2,
+                that.height - 10);
             } catch (ex) {}
+          }
+        }
+
+        //set up a y axis
+        if (that.yAxisLabelArr[0]) {
+          // Use try / catch to stop IE 8 from going to error town
+          ctx.fillStyle = "#333";
+          ctx.font = "bold 16px sans-serif";
+          ctx.textAlign = "center";
+
+          try {
+            ctx.save();
+            ctx.translate(12, 250);
+            ctx.rotate(-Math.PI / 2);
+            ctx.textAlign = "center";
+            ctx.fillText(" Hours of Sleep", 0, 0);
+            ctx.restore();
+          } catch (ex) {}
+        }
+      };
+
+      // Public properties and methods
+      this.width = 300;
+      this.height = 150;
+      this.maxValue;
+      this.margin = 20;
+      //this.colors = ["purple", "red", "green", "yellow"];
+      this.colors = ["blue"];
+      this.curArr = [];
+      this.backgroundColor = "#fff";
+      this.xAxisLabelArr = [];
+      this.yAxisLabelArr = [];
+      this.animationInterval = 100;
+      this.animationSteps = 10;
+
+      // Update method sets the end bar array and starts the animation
+      this.update = function (newArr) {
+
+        // If length of target and current array is different
+        if (that.curArr.length !== newArr.length) {
+          that.curArr = newArr;
+          draw(newArr);
+        } else {
+          // Set the starting array to the current array
+          startArr = that.curArr;
+          // Set the target array to the new array
+          endArr = newArr;
+          // Animate from the start array to the end array
+          if (!looping) {
+            loop();
+          }
+        }
+      };
+    }
+
+    var canvas = document.getElementById('canvasID');
+    var ctx = canvas.getContext('2d');
+    var graph = new BarGraph(ctx);
+
+    //localStorage.setItem('hours', totalSleep);
+    //localStorage.setItem('day', month+"/"+day);
+
+    var sleeplog = localStorage.getItem('hours');
+    /*
+            if(localStorage.getItem("weekArray") === null){
+              let thisWeek = [0,0,0,0,0,0,0];
+              localStorage.setItem('weekArray',JSON.stringify(thisWeek));
             }
-      	  };
+    /*
+            else{
+              let thisWeek = JSON.parse(localStorage.getItem('weekArray'));
+            }
+    */
+    let thisWeek = localStorage.getItem('thisWeek') ? JSON.parse(localStorage.getItem('thisWeek')) : [0, 0, 0, 0, 0, 0,
+      0
+    ];
 
-        // Public properties and methods
+    if (localStorage.getItem("day") === null) {
 
-        this.width = 300;
-        this.height = 150;
-        this.maxValue;
-        this.margin = 20;
-        //this.colors = ["purple", "red", "green", "yellow"];
-        this.colors = ["blue"];
-        this.curArr = [];
-        this.backgroundColor = "#fff";
-        this.xAxisLabelArr = [];
-        this.yAxisLabelArr = [];
-        this.animationInterval = 100;
-        this.animationSteps = 10;
+    } else {
+      let now = localStorage.getItem('day');
+      thisWeek[now] = localStorage.getItem('hours');
+      localStorage.setItem('thisWeek', JSON.stringify(thisWeek));
+    }
+    /*
 
-        // Update method sets the end bar array and starts the animation
-      	this.update = function (newArr) {
+            localStorage.setItem('weekArray', thisWeek);
 
-      	  // If length of target and current array is different
-      	  if (that.curArr.length !== newArr.length) {
-      		that.curArr = newArr;
-      		draw(newArr);
-      	  } else {
-      		// Set the starting array to the current array
-      		startArr = that.curArr;
-      		// Set the target array to the new array
-      		endArr = newArr;
-      		// Animate from the start array to the end array
-      		if (!looping) {
-      		  loop();
-      		}
-      	  }
-      	};
-      }
+            var test = localStorage.getItem('tester');
+            test++;
+            localStorage.setItem('tester',test);
+            document.write(test);
+    /*
 
 
-
-        var canvas = document.getElementById('canvasID');
-        var ctx = canvas.getContext('2d');
-        var graph = new BarGraph(ctx);
-
-        //localStorage.setItem('hours', totalSleep);
-        //localStorage.setItem('day', month+"/"+day);
+            localStorage.setItem('hourskey',JSON.stringify(lsHourArr);
+            const data = JSON.parse(localStorage.getItem('hourskey'));
 
 
-        var sleeplog = localStorage.getItem('hours');
-/*
-        if(localStorage.getItem("weekArray") === null){
-          let thisWeek = [0,0,0,0,0,0,0];
-          localStorage.setItem('weekArray',JSON.stringify(thisWeek));
-        }
-/*
-        else{
-          let thisWeek = JSON.parse(localStorage.getItem('weekArray'));
-        }
-*/
-        let thisWeek = localStorage.getItem('thisWeek') ? JSON.parse(localStorage.getItem('thisWeek')) : [0,0,0,0,0,0,0];
+            var slepthours =localStorage.getItem('hours');
 
-        if(localStorage.getItem("day")===null){
+            lsHourArr.push(slepthours);
+            localStorage.setItem('hourskey',JSON.stringify(lsHourArr);
+    */
+    //localStorage.setItem('sleptHoursArray', hoursArr);
+    //hoursArr=localStorage.getItem('sleptHoursArray');
 
-        }
-        else{
-          let now= localStorage.getItem('day');
-          thisWeek[now]=localStorage.getItem('hours');
-          localStorage.setItem('thisWeek', JSON.stringify(thisWeek));
-        }
-/*
+    //  var hoursArr=lsHourArr;
+    var hoursArr = thisWeek;
+    switch (hoursArr.length) {
+      case 1:
+        graph.margin = 300;
+        break;
+      case 2:
+        graph.margin = 100;
+        break;
+      case 3:
+        graph.margin = 50;
+        break;
+      default:
+        graph.margin = 20;
+    }
 
-        localStorage.setItem('weekArray', thisWeek);
+    graph.width = 800;
+    graph.height = 500;
 
-        var test = localStorage.getItem('tester');
-        test++;
-        localStorage.setItem('tester',test);
-        document.write(test);
-/*
+    var datesArr = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    graph.xAxisLabelArr = datesArr;
+    graph.yAxisLabelArr = ["Hours of Sleep"];
 
+    graph.update(hoursArr);
 
-        localStorage.setItem('hourskey',JSON.stringify(lsHourArr);
-        const data = JSON.parse(localStorage.getItem('hourskey'));
+    // For the y-axis
+    ctx.beginPath();
+    ctx.moveTo(18, 0);
+    ctx.lineTo(18, 495);
+    ctx.stroke();
 
+    // For the x-axis
+    ctx.beginPath();
+    ctx.moveTo(0, 475);
+    ctx.lineTo(790, 475);
+    ctx.stroke();
+  </script>
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="js/bootstrap.min.js"></script>
+  <!-- JavaScript for side nav bar functionality -->
+  <script src="js/sidenav.js"></script>
 
-        var slepthours =localStorage.getItem('hours');
-
-        lsHourArr.push(slepthours);
-        localStorage.setItem('hourskey',JSON.stringify(lsHourArr);
-*/
-        //localStorage.setItem('sleptHoursArray', hoursArr);
-        //hoursArr=localStorage.getItem('sleptHoursArray');
-
-      //  var hoursArr=lsHourArr;
-      var hoursArr= thisWeek;
-        switch(hoursArr.length){
-          case 1:
-            graph.margin = 300;
-            break;
-          case 2:
-            graph.margin = 100;
-            break;
-          case 3:
-            graph.margin = 50;
-            break;
-          default:
-            graph.margin = 20;
-        }
-
-        graph.width = 800;
-        graph.height = 500;
-
-        var datesArr = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-        graph.xAxisLabelArr = datesArr;
-        graph.yAxisLabelArr = ["Hours of Sleep"];
-
-        graph.update(hoursArr);
-
-
-
-        //for the y axis
-        ctx.beginPath();
-        ctx.moveTo(18, 0);
-        ctx.lineTo(18, 495);
-        ctx.stroke();
-
-        //for the x axis
-        ctx.beginPath();
-        ctx.moveTo(0, 475);
-        ctx.lineTo(790, 475);
-        ctx.stroke();
-
-
-    </script>
-
-
-
-
-
-
-
-
-
-
-
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
-    <!-- JavaScript for side nav bar functionality -->
-    <script src="js/sidenav.js"></script>
 </body>
 
 </html>
