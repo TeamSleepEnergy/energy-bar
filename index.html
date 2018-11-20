@@ -178,6 +178,11 @@
 
     <!--Energy bar related functions-->
     <script>
+    //localStorage.clear();
+
+    if (localStorage.getItem("Hours") === null){
+      localStorage.setItem("Hours", 8);
+    }
         // "Data recorded" popup
         function savePopup() {
             $(".datapopup").fadeIn();

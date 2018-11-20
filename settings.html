@@ -78,7 +78,7 @@
       </div>
       <div class="form-group">
         <label for="exampleFormControlSelect1">Usual Amount of Sleep (Hours)</label>
-        <select class="form-control" value="8" id="hoursinput">
+        <select class="form-control" id="hoursinput">
           <option>3</option>
           <option>4</option>
           <option>5</option>
@@ -110,6 +110,11 @@
   </div>
 
   <script>
+  /*var checkhours = document.getElementById("hoursinput").value;
+  if(checkhours === null){
+    checkhours = 8;
+    localStorage.setItem("Hours", checkhours);
+  }*/
     // Save popup
     function savedisp() {
       $(".a").fadeIn();
