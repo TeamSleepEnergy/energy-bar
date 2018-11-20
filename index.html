@@ -249,6 +249,7 @@
 //Time remaining related functions
 var tRemain
         $('#setButton').click(function(){
+          clearInterval(tRemain);
           tRemain = setInterval(updateTime, 300);
         })
 
@@ -301,6 +302,7 @@ var tRemain
 //percent related functions
 var percRemain
         $('#setButton').click(function(){
+          clearInterval(percRemain);
            percRemain = setInterval(updatePercent, 300);
         })
 
@@ -347,14 +349,16 @@ var percRemain
             }
             var totalSleep = (sleptHours - carryover) * 60 + sleptMin;
             var current_progress = (totalSleep/ 480)*100;
+            var avgsleep = localStorage.getItem("Hours");
             //var current_progress = (totalSleep / (parseInt(localStorage.getItem("Hours"))*60))*100;
-            document.getElementById("percent").innerHTML = "Energy: "+Math.round(current_progress*10)/10+"%";
+            document.getElementById("percent").innerHTML = "Energy (% of "+avgsleep+" hours of sleep)"+": "+Math.round(current_progress*10)/10+"%";
           }
 
 
 //initBar related functions
 var interval;
         $('#setButton').click(function(){
+          clearInterval(interval);
           interval = setInterval(initBar, 300);
         })
 
