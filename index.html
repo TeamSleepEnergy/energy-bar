@@ -352,13 +352,6 @@ var percRemain
             document.getElementById("percent").innerHTML = "Energy (% of "+avgsleep+" hours of sleep)"+": "+Math.round(current_progress*10)/10+"%";
           }
 
-            var totalSleep = (sleptHours - carryover) * 60 + sleptMin;
-            var current_progress = (totalSleep / 480) * 100;
-            if (current_progress >= 100) {
-                current_progress = 100;
-            }
-            document.getElementById("percent").innerHTML = "Energy: " + Math.round(current_progress * 10) / 10 + "%";
-        }
 
 //initBar related functions
 var interval;
