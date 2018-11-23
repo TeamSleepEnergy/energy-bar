@@ -1,28 +1,81 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    max-width: 100%;
+    box-sizing: border-box;
+    -webkit-font-smoothing: subpixel-antialiased;
+}
 
 body {
-    background-image: url(https://images.pexels.com/photos/914929/pexels-photo-914929.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
-    background-color: #efefef;
+    background-image: url(../images/background.jpg);
     background-size: cover;
     background-repeat: no-repeat;
+    background-position: center;
+    background-color: #3768BC;
 }
 
-
-.form-control{
-  max-width: 60%;
+.login-page {
+    width: 100%;
+    padding: 10% 0 0;
+    margin: auto;
 }
 
-.box{
-    position: absolute;
-    left: 30%;
-    top: 8%;
-    background-color: white;
-    opacity: 0.85;
+.form {
+    position: relative;
+    z-index: 1;
+    background: #FFFFFF;
+    max-width: 25%;
+    margin: 0 auto;
+    padding: 40px;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    text-align: center;
+}
 
-    width: 500px;
-    height: 300px;
+.form input {
+    outline: 0;
+    background: #f2f2f2;
+    width: 100%;
+    border: 0;
+    margin: 0 0 5%;
+    padding: 5%;
+    box-sizing: border-box;
+    font-size: 1.2em;
+}
 
-    margin: 90px auto;
-    border: 1px solid black;
+.form #login-button, .form #create-button {
+    text-transform: uppercase;
+    outline: 0;
+    background: #4CAF50;
+    width: 100%;
+    border: 0;
+    padding: 5%;
+    color: #FFFFFF;
+    font-size: 1.2em;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+}
 
+.form #login-button:hover,
+.form #login-button:active,
+.form #login-button:focus,
+.form #create-button:hover,
+.form #create-button:active,
+.form #create-button:focus {
+    background: #43A047;
+}
 
+.form .message {
+    margin: 5% 0 0;
+    color: #b3b3b3;
+    font-size: 1em;
+}
+
+.form .message a {
+    color: #4CAF50;
+    text-decoration: none;
+}
+
+.form .register-form {
+    display: none;
 }

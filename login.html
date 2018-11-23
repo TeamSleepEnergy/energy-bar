@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Login Page</title>
+  <title>Login</title>
 
   <!-- Bootstrap -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -14,72 +14,31 @@
 </head>
 
 <body>
-  <div align="center" class="box">
-    <h1>Login</h1>
+  <div class="login-page">
+    <div class="form">
+      <form class="login-form" method="post">
+        <input type="text" id="login-username" placeholder="Username" required>
+        <input type="password" id="login-password" placeholder="Password" required>
+        <input type="submit" value="login" id="login-button" onclick="return check()">
+        <p class="message">Not registered?<a href="#"> Create an account</a></p>
+      </form>
 
-    <form>
-
-      <div class="form-group">
-        <label for="exampleFormControlSelect1">Username ID</label>
-        <input class="form-control" id="UserInput">
-      </div>
-      <div class="form-group">
-        <label for="exampleFormControlTextarea1">Password</label>
-        <input type="password" class="form-control" id="Userpassword" rows="3"></textarea>
-        <input type="checkbox" onclick="showPassword()">Show Password
-      </div>
-      <a id="loginbtn" href="index.html" class="btn btn-primary" onclick="store();"> Login</a>
-
-    </form>
-
-    <!--<h2>Register</h2>
-    <form>
-
-      <div class="form-group">
-        <label for="exampleFormControlSelect1">Username ID</label>
-        <input class="form-control" id="UserInput">
-      </div>
-      <div class="form-group">
-        <label for="exampleFormControlTextarea1">Password</label>
-        <input type="password" class="form-control" id="Userpassword" rows="3"></textarea>
-        <input type="checkbox" onclick="showPassword()">Show Password
-      </div>
-      <a href="index.html" class="btn btn-primary"> Sign Up</a>
-
-    </form>
+      <form class="register-form" method="post">
+        <input type="text" id="register-username" placeholder="Username" required>
+        <input type="password" id="register-password" placeholder="Password" required>
+        <input type="password" id="confirm-password" placeholder="Confirm Password" required>
+        <input type="submit" value="create" id="create-button" onclick="return validateRegistration()">
+        <p class="message">Already registered?<a href="#"> Sign In</a></p>
+      </form>
+    </div>
   </div>
--->
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
-    <!-- JavaScript to activate showing password; password hidden by default -->
-    <script>
-      //initialize 'running' to 0
-      localStorage.setItem("running", 0);
-
-      //show pw function
-      function showPassword() {
-        var x = document.getElementById("Userpassword");
-
-        if (x.type == "password") {
-          x.type = "text";
-        } else {
-          x.type = "password";
-        }
-      }
-      //username and pw
-      var username = document.getElementById('UserInput');
-      var password = document.getElementById('Userpassword');
-
-      //store login info
-      function store() {
-        localStorage.setItem("username", username.value);
-        localStorage.setItem("password", password.value);
-      }
-    </script>
-
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="js/bootstrap.min.js"></script>
+  <!-- JavaScript for Login page -->
+  <script src="js/login.js"></script>
 </body>
 
 </html>
