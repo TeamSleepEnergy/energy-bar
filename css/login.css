@@ -42,7 +42,8 @@ body {
     font-size: 1.2em;
 }
 
-.form #login-button, .form #create-button {
+.form #login-button,
+.form #create-button {
     text-transform: uppercase;
     outline: 0;
     background: #4CAF50;

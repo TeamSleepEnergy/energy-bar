@@ -10,14 +10,9 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap theme -->
     <link href="css/bootstrap-theme.min.css" rel="stylesheet">
-    <!-- Custom side nav bar CSS -->
     <link href="css/sidenav.css" rel="stylesheet">
-    <!--Energy bar css-->
     <link href="css/energy-bar.css" rel="stylesheet">
-    <!-- CSS for clock -->
     <link href="css/clock.css" rel="stylesheet">
-    <!-- CSS for timepicker -->
-    <link href="css/bootstrap-timepicker.min.css">
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -25,13 +20,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
-    <!-- JavaScript for side nav bar functionality -->
     <script src="js/sidenav.js"></script>
-    <!-- JavaScript for clock -->
     <script src="js/clock.js"></script>
-    <!-- Increase/ decrease energy bar JavaScript-->
     <script src="js/energy-bar.js"></script>
-    <!-- JavaScript for alerts -->
     <script src="js/alert.js"></script>
     <!-- Activate Health Effects popover -->
     <script>
@@ -169,16 +160,17 @@
 
     <!--Energy bar related functions-->
     <script>
-    //localStorage.clear();
+        //localStorage.clear();
 
-    if (localStorage.getItem("Hours") === null){
-      localStorage.setItem("Hours", 8);
-    }
+        if (localStorage.getItem("Hours") === null) {
+            localStorage.setItem("Hours", 8);
+        }
         // "Data recorded" popup
         function savePopup() {
             $(".datapopup").fadeIn();
             $(".datapopup").fadeOut();
         }
+
         // Check to see if bar is already running
         $('#setButton').click(function () {
             localStorage.setItem("running", 1);
@@ -225,13 +217,16 @@
                 sleptHours = wakeHour - hour;
 
             }
+
             var sleptMin = Math.abs((60 - min) - wakeMin);
             if (min > wakeMin) {
                 var carryover = 1;
             } else {
                 var carryover = 0;
             }
+
             var totalSleep = Math.round((((sleptHours - carryover) * 60 + sleptMin) / 60) * 10) / 10;
+
             localStorage.setItem('hours', totalSleep);
             localStorage.setItem('day', date.getDay());
         }
@@ -244,11 +239,11 @@
             document.getElementById("percent").innerHTML = "Energy: "
         }
 
-//Time remaining related functions
-var tRemain
-        $('#setButton').click(function(){
-          clearInterval(tRemain);
-          tRemain = setInterval(updateTime, 300);
+        //Time remaining related functions
+        var tRemain
+        $('#setButton').click(function () {
+            clearInterval(tRemain);
+            tRemain = setInterval(updateTime, 300);
         })
 
         $('#gotosleep').click(function () {
@@ -309,16 +304,17 @@ var tRemain
                 " minutes ";
         }
 
-//percent related functions
-var percRemain
-        $('#setButton').click(function(){
-        clearInterval(percRemain);
-           percRemain = setInterval(updatePercent, 300);
+        // Percent related functions
+        var percRemain
+        $('#setButton').click(function () {
+            clearInterval(percRemain);
+            percRemain = setInterval(updatePercent, 300);
         })
 
         $('#gotosleep').click(function () {
             clearInterval(percRemain);
         })
+
         /*
                 function percInterval(){
                    var percRemain = setInterval(updatePercent,300);
@@ -329,6 +325,7 @@ var percRemain
                   clearInterval(percRemain);
                 }
         */
+
         function updatePercent() {
             var date = new Date();
             var hour = date.getHours();
@@ -364,18 +361,21 @@ var percRemain
                 var carryover = 0;
                 sleptMin = wakeMin - min;
             }
-            var totalSleep = (sleptHours - carryover) * 60 + sleptMin;
-            var current_progress = (totalSleep/ 480)*100;
-            var avgsleep = localStorage.getItem("Hours");
-            var current_progress = (totalSleep / (parseInt(localStorage.getItem("Hours"))*60))*100;
-            document.getElementById("percent").innerHTML = "Energy (% of "+avgsleep+" hours of sleep)"+": "+Math.round(current_progress*10)/10+"%";
-          }
 
-//initBar related functions
-var interval;
-        $('#setButton').click(function(){
-          clearInterval(interval);
-          interval = setInterval(initBar, 300);
+            var totalSleep = (sleptHours - carryover) * 60 + sleptMin;
+            var current_progress = (totalSleep / 480) * 100;
+            var avgsleep = localStorage.getItem("Hours");
+            var current_progress = (totalSleep / (parseInt(localStorage.getItem("Hours")) * 60)) * 100;
+            
+            document.getElementById("percent").innerHTML = "Energy (% of " + avgsleep + " hours of sleep)" + ": " +
+                Math.round(current_progress * 10) / 10 + "%";
+        }
+
+        // initBar related functions
+        var interval;
+        $('#setButton').click(function () {
+            clearInterval(interval);
+            interval = setInterval(initBar, 300);
         })
 
         $('#gotosleep').click(function () {
@@ -433,7 +433,7 @@ var interval;
 
             var totalSleep = (sleptHours - carryover) * 60 + sleptMin;
             //var current_progress = (totalSleep / 480) * 100;
-var current_progress = (totalSleep / (parseInt(localStorage.getItem("Hours"))*60))*100;
+            var current_progress = (totalSleep / (parseInt(localStorage.getItem("Hours")) * 60)) * 100;
             $("#bar").css("width", current_progress + "%")
                 .attr("aria-valuenow", current_progress)
             //.text(current_progress + "% Complete");

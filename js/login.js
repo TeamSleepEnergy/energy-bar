@@ -8,7 +8,6 @@ $(document).ready(function () {
     });
 });
 
-
 /**
  * Storing input from register-form to localStorage
  * 
