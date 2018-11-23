@@ -31,22 +31,19 @@
     <script src="js/clock.js"></script>
     <!-- Increase/ decrease energy bar JavaScript-->
     <script src="js/energy-bar.js"></script>
+    <!-- JavaScript for alerts -->
     <script src="js/alert.js"></script>
     <!-- Activate Health Effects popover -->
     <script>
-        $(document).ready(function () {
-            $('[rel="popover"]').popover({
+        $(document).ready(function() {
+            $('#health').popover({
+                content: "<ul> <li>Lower level of alertness</li> <li>Decreased ability to concentrate on tasks</li> <li>Negatively impacted logical reasoning</li> <li>Increased stress responses</li> </ul>",
                 html: true,
-                content: function () {
-                    var content = $($(this).data('popover-content')).clone(true).removeClass(
-                        'hidden');
-                    return content;
-                }
-            }).click(function (e) {
-                e.preventDefault();
+                placement: "bottom"
             });
         });
     </script>
+
     <style>
         b.datapopup{
       display: none;
@@ -76,6 +73,8 @@
                 <label class="col-sm-5 control-label" for="UserInput"><i>Wake up at:</i></label>
                 <div class="col-sm-3">
                     <select class="form-control input-sm" id="UserInput" autofocus>
+                        <option>12:00 AM</option>
+                        <option>12:30 AM</option>
                         <option>01:00 AM</option>
                         <option>01:30 AM</option>
                         <option>02:00 AM</option>
@@ -146,19 +145,11 @@
         </b>
     </div>
 
+    <!-- Health effects popover -->
     <div class="container" align="right">
-        <!-- Health eff:ects popover -->
-        <a rel="popover" tabindex="0" class="btn btn-lg btn-info" role="button" data-toggle="popover" data-trigger="focus"
-            data-placement="bottom" data-html="true" data-popover-content="#effects">Health Effects</a>
-
-        <div class="hidden" id="effects">
-            <ul>
-                <li>Lower level of alertness</li>
-                <li>Decrease in ability to concentrate on tasks</li>
-                <li>Negatively impacted logical reasoning</li>
-                <li>Increased stress responses</li>
-            </ul>
-        </div>
+        <button type="button" class="btn btn-info" id="health">
+            Health Effects
+        </button>
     </div>
 
     <!-- Energy bar -->
@@ -217,9 +208,16 @@
             var pmCheck = wakeUpString.charAt(6);
             var sleptHours = 0;
 
-            if (pmCheck == "P" && hour != 12) {
+            // Edge case for setting wake-up time to 12:00 AM & 12:30 AM 
+            if (pmCheck != "P" && wakeHour == 12) {
+                wakeHour = 0;
+            }
+
+            // Sets conditional for all times except for 12:00 PM & 12:30 PM
+            if (pmCheck == "P" && wakeHour != 12) {
                 wakeHour += 12;
             }
+
             if (hour > wakeHour) {
                 sleptHours = 24 - hour + wakeHour;
 
@@ -279,7 +277,13 @@ var tRemain
             var pmCheck = wakeUpString.charAt(6);
             var sleptHours = 0;
 
-            if (pmCheck == "P" && hour != 12) {
+            // Edge case for setting wake-up time to 12:00 AM & 12:30 AM 
+            if (pmCheck != "P" && wakeHour == 12) {
+                wakeHour = 0;
+            }
+
+            // Sets conditional for all times except for 12:00 PM & 12:30 PM
+            if (pmCheck == "P" && wakeHour != 12) {
                 wakeHour += 12;
             }
 
@@ -291,11 +295,13 @@ var tRemain
 
             }
 
-            var sleptMin = Math.abs((60 - min) - wakeMin);
+            var sleptMin = 0
             if (min > wakeMin) {
                 var carryover = 1;
+                sleptMin = (60 + wakeMin) - min;
             } else {
                 var carryover = 0;
+                sleptMin = wakeMin - min;
             }
 
             sleptHours = sleptHours - carryover;
@@ -334,7 +340,13 @@ var percRemain
             var pmCheck = wakeUpString.charAt(6);
             var sleptHours = 0;
 
-            if (pmCheck == "P" && hour != 12) {
+            // Edge case for setting wake-up time to 12:00 AM & 12:30 AM 
+            if (pmCheck != "P" && wakeHour == 12) {
+                wakeHour = 0;
+            }
+
+            // Sets conditional for all times except for 12:00 PM & 12:30 PM
+            if (pmCheck == "P" && wakeHour != 12) {
                 wakeHour += 12;
             }
 
@@ -344,11 +356,13 @@ var percRemain
                 sleptHours = wakeHour - hour;
             }
 
-            var sleptMin = Math.abs((60 - min) - wakeMin);
+            var sleptMin = 0
             if (min > wakeMin) {
                 var carryover = 1;
+                sleptMin = (60 + wakeMin) - min;
             } else {
                 var carryover = 0;
+                sleptMin = wakeMin - min;
             }
             var totalSleep = (sleptHours - carryover) * 60 + sleptMin;
             var current_progress = (totalSleep/ 480)*100;
@@ -390,7 +404,13 @@ var interval;
             var pmCheck = wakeUpString.charAt(6);
             var sleptHours = 0;
 
-            if (pmCheck == "P" && hour != 12) {
+            // Edge case for setting wake-up time to 12:00 AM & 12:30 AM 
+            if (pmCheck != "P" && wakeHour == 12) {
+                wakeHour = 0;
+            }
+
+            // Sets conditional for all times except for 12:00 PM & 12:30 PM
+            if (pmCheck == "P" && wakeHour != 12) {
                 wakeHour += 12;
             }
 
@@ -402,12 +422,15 @@ var interval;
 
             }
 
-            var sleptMin = Math.abs((60 - min) - wakeMin);
+            var sleptMin = 0
             if (min > wakeMin) {
                 var carryover = 1;
+                sleptMin = (60 + wakeMin) - min;
             } else {
                 var carryover = 0;
+                sleptMin = wakeMin - min;
             }
+
             var totalSleep = (sleptHours - carryover) * 60 + sleptMin;
             //var current_progress = (totalSleep / 480) * 100;
 var current_progress = (totalSleep / (parseInt(localStorage.getItem("Hours"))*60))*100;
