@@ -4,7 +4,8 @@ form {
     position: relative;
 }
 
-select, input {
+select,
+input {
     text-align: center;
 }
 
