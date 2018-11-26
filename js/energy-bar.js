@@ -1,4 +1,4 @@
-var dropDown, tRemain, percRemain;
+var dropDown, tRemain, percRemain, interval;
 
 $(document).ready(function () {
     if (localStorage.getItem("Hours") === null) {
