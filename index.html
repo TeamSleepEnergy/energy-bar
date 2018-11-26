@@ -397,8 +397,7 @@
             var avgsleep = localStorage.getItem("Hours");
             var current_progress = (totalSleep / (parseInt(localStorage.getItem("Hours")) * 60)) * 100;
 
-            document.getElementById("percent").innerHTML = "Energy (% of " + avgsleep + " hours of sleep)" + ": " +
-                Math.round(current_progress * 10) / 10 + "%";
+            document.getElementById("percent").innerHTML = "Energy ("+Math.round(current_progress * 10) / 10 + "% of " + avgsleep + " hours of sleep)";
             if (current_progress <= 0){
                 clearInterval(percRemain);
                 document.getElementById("percent").innerHTML = "Energy: "
