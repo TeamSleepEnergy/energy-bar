@@ -112,16 +112,8 @@
         </div>
     </div>
 
-    <div class="container" align="center">
-        <b id="timeRemain">
-            <font size="2">Time Remaining:</font>
-        </b>
-        &nbsp;
-        &nbsp;
-        <button id="gotosleep" type="button" class="btn" onclick="sleepytime(); savePopup(); clearNight();">Going to
-            Sleep!</button>
-        <b class="datapopup">Data Recorded!</b>
-        <br></br>
+
+      <div class="container" align="center">
         <b id="percent">
             <font size="2">Energy:</font>
         </b>
@@ -136,9 +128,11 @@
 
     <!-- Energy bar -->
     <div class="container">
+      <br>
+    </br>
+    <br>
+  </br>
         <div align="center">
-            <br>
-            <br>
             <div class="col">
                 <div class="progress vertical">
                     <div id="bar" class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="0"
@@ -148,6 +142,20 @@
             </div>
         </div>
     </div>
+    <br>
+  </br>
+  <br>
+</br>
+    <div class="container" align="center">
+        <b id="timeRemain">
+            <font size="2">Time Remaining:</font>
+        </b>
+        &nbsp;
+        &nbsp;
+        <button id="gotosleep" type="button" class="btn btn-danger" onclick="sleepytime(); savePopup(); clearNight();">Going to
+            Sleep!</button>
+        <b class="datapopup">Data Recorded!</b>
+      </div>
 </body>
 
 </html>

@@ -1,11 +1,13 @@
 var dropDown, tRemain, percRemain, interval;
 
+//localStorage.clear();
 $(document).ready(function () {
     if (localStorage.getItem("Hours") === null) {
         localStorage.setItem("Hours", 8);
     }
 
     dropDown = document.getElementById("UserInput");
+    //localStorage.setItem("wakeString", dropDown.options[dropDown.selectedIndex].text);
 });
 
 // "Data recorded" popup
@@ -92,7 +94,7 @@ function updateTime() {
     var min = date.getMinutes() + 1;
     var sec = date.getSeconds();
     //var dropDown = document.getElementById("UserInput");
-    localStorage.setItem("wakeString", dropDown.options[dropDown.selectedIndex].text);
+    //localStorage.setItem("wakeString", dropDown.options[dropDown.selectedIndex].text);
     var wakeUpString = localStorage.getItem("wakeString"); //dropDown.options[dropDown.selectedIndex].text;
     var wakeHour = Number(wakeUpString.charAt(0) + wakeUpString.charAt(1));
     var wakeMin = Number(wakeUpString.charAt(3) + wakeUpString.charAt(4));
@@ -193,14 +195,13 @@ function updatePercent() {
     var avgsleep = localStorage.getItem("Hours");
     var current_progress = (totalSleep / (parseInt(localStorage.getItem("Hours")) * 60)) * 100;
 
-    // Have percentage max out at 100 if the calculated percentage was 
+    // Have percentage max out at 100 if the calculated percentage was
     // greater than 100.
     if (current_progress > 100) {
         current_progress = 100;
     }
 
-    document.getElementById("percent").innerHTML = "Energy (% of " + avgsleep + " hours of sleep)" + ": " +
-        Math.round(current_progress * 10) / 10 + "%";
+    document.getElementById("percent").innerHTML = "Energy ("+Math.round(current_progress * 10) / 10 + "% of " + avgsleep + " hours of sleep)";
 
     if (current_progress <= 0) {
         clearInterval(percRemain);
@@ -264,7 +265,7 @@ function initBar() {
     $("#bar").css("width", current_progress + "%")
         .attr("aria-valuenow", current_progress)
     //.text(current_progress + "% Complete");
-    
+
     if (current_progress <= 0) {
         clearInterval(interval);
         $("#bar").css("width", 0 + "%")
