@@ -27,10 +27,13 @@ $(document).on('click touch', function () {
     var percent = updatePercent();
 
     if (percent >= 75) {
+        $('#health').attr('data-original-title', '75% - 100%')
         $('#health').attr('data-content', greenMessage);
     } else if (percent < 75 && percent >= 45) {
+        $('#health').attr('data-original-title', '45% - 74%')
         $('#health').attr('data-content', yellowMessage);
     } else {
+        $('#health').attr('data-original-title', '0% - 44%')
         $('#health').attr('data-content', redMessage);
     }
 });
