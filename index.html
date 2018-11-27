@@ -13,6 +13,7 @@
     <link href="css/sidenav.css" rel="stylesheet">
     <link href="css/energy-bar.css" rel="stylesheet">
     <link href="css/clock.css" rel="stylesheet">
+    <link href="css/help-modal.css" rel="stylesheet">
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" defer></script>
@@ -25,6 +26,7 @@
     <script src="js/energy-bar.js" defer></script>
     <script src="js/alert.js" defer></script>
     <script src="js/health.js" defer></script>
+    <script src="js/help-modal.js" defer></script>
 
     <style>
         b.datapopup{
@@ -51,6 +53,19 @@
     <div class="container">
         <div class="jumbotron d-flex align-items-center">
             <div id="clockbox"></div>
+
+            <!-- Trigger help modal -->
+            <img id="help-btn" src="icons/question.png" alt="Help Icon">
+
+            <!-- Modal -->
+            <div id="help-modal" class="modal">
+                <!-- Close button -->
+                <span class="close">&times;</span>
+
+                <!-- App tutorial image -->
+                <img class="modal-content" id="tutorial-img">
+            </div>
+
             <div class="div-horizontal" align="center">
                 <label class="col-sm-5 control-label" for="UserInput"><i>Wake up at:</i></label>
                 <div class="col-sm-3">
