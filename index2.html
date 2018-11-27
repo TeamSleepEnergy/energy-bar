@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" http-equiv="Content-Type">
+    <title>Energy Bar Home Page</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap theme -->
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="css/sidenav.css" rel="stylesheet">
+    <link href="css/energy-bar.css" rel="stylesheet">
+    <link href="css/clock.css" rel="stylesheet">
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" defer></script>
+    <!-- Popper (necessary for Bootstrap's Popover functionality) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" defer></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js" defer></script>
+    <script src="js/sidenav.js" defer></script>
+    <script src="js/clock.js" defer></script>
+    <script src="js/energy-bar.js" defer></script>
+    <script src="js/alert.js" defer></script>
+    <script src="js/health.js" defer></script>
+
+    <style>
+        b.datapopup{
+      display: none;
+    }
+    </style>
+</head>
+
+<body>
+    <!-- Side navigation bar -->
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="index.html">Home</a>
+        <a href="data2.html">Data</a>
+        <a href="settings.html">Settings</a>
+        <text> ----------------------------------------------</text>
+        <a href="login.html">Log out</a>
+    </div>
+
+    <!-- Icon for side nav bar -->
+    <span style="font-size:3.7em;cursor:pointer;position:absolute;top:3%;left:1.5%" onclick="openNav()">&#9776;</span>
+
+    <!-- Display for current time, and wake-up time selection -->
+    <div class="container">
+        <div class="jumbotron d-flex align-items-center">
+            <div id="clockbox"></div>
+            <div class="div-horizontal" align="center">
+                <label class="col-sm-5 control-label" for="UserInput"><i>Wake up at:</i></label>
+                <div class="col-sm-3">
+                    <select class="form-control input-sm" id="UserInput" autofocus>
+                        <option>12:00 AM</option>
+                        <option>12:30 AM</option>
+                        <option>01:00 AM</option>
+                        <option>01:30 AM</option>
+                        <option>02:00 AM</option>
+                        <option>02:30 AM</option>
+                        <option>03:00 AM</option>
+                        <option>03:30 AM</option>
+                        <option>04:00 AM</option>
+                        <option>04:30 AM</option>
+                        <option>05:00 AM</option>
+                        <option>05:30 AM</option>
+                        <option>06:00 AM</option>
+                        <option>06:30 AM</option>
+                        <option>07:00 AM</option>
+                        <option>07:30 AM</option>
+                        <option>08:00 AM</option>
+                        <option>08:30 AM</option>
+                        <option>09:00 AM</option>
+                        <option>09:30 AM</option>
+                        <option>10:00 AM</option>
+                        <option>10:30 AM</option>
+                        <option>11:00 AM</option>
+                        <option>11:30 AM</option>
+                        <option>12:00 PM</option>
+                        <option>12:30 PM</option>
+                        <option>01:00 PM</option>
+                        <option>01:30 PM</option>
+                        <option>02:00 PM</option>
+                        <option>02:30 PM</option>
+                        <option>03:00 PM</option>
+                        <option>03:30 PM</option>
+                        <option>04:00 PM</option>
+                        <option>04:30 PM</option>
+                        <option>05:00 PM</option>
+                        <option>05:30 PM</option>
+                        <option>06:00 PM</option>
+                        <option>06:30 PM</option>
+                        <option>07:00 PM</option>
+                        <option>07:30 PM</option>
+                        <option>08:00 PM</option>
+                        <option>08:30 PM</option>
+                        <option>09:00 PM</option>
+                        <option>09:30 PM</option>
+                        <option>10:00 PM</option>
+                        <option>10:30 PM</option>
+                        <option>11:00 PM</option>
+                        <option>11:30 PM</option>
+                    </select>
+                </div>
+                <div class="col-sm-2" align="left">
+                    <button id="setButton" type="button" class="btn">Set</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+      <div class="container" align="center">
+        <b id="percent">
+            <font size="2">Energy:</font>
+        </b>
+    </div>
+
+    <!-- Health effects popover -->
+    <div class="container" align="right">
+        <a tabindex="0" class="btn btn-lg btn-info" id="health">
+            Health Effects
+        </a>
+    </div>
+
+    <!-- Energy bar -->
+    <div class="container">
+      <br>
+    </br>
+    <br>
+  </br>
+        <div align="center">
+            <div class="col">
+                <div class="progress vertical">
+                    <div id="bar" class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="0"
+                        aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+  </br>
+  <br>
+</br>
+    <div class="container" align="center">
+        <b id="timeRemain">
+            <font size="2">Time Remaining:</font>
+        </b>
+        &nbsp;
+        &nbsp;
+        <button id="gotosleep" type="button" class="btn btn-danger" onclick="sleepytime(); savePopup(); clearNight();">Going to
+            Sleep!</button>
+        <b class="datapopup">Data Recorded!</b>
+      </div>
+</body>
+
+</html>
