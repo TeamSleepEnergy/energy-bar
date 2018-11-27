@@ -2,5 +2,5 @@
 
 https://teamsleepenergy.github.io/energy-bar/login
 
-///// CREDITS /////
+///// CREDITS ///// <br />
 Question icon made by Roundicons from www.flaticon.com
