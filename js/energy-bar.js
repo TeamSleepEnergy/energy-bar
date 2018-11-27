@@ -193,7 +193,7 @@ function updatePercent() {
     var avgsleep = localStorage.getItem("Hours");
     var current_progress = (totalSleep / (parseInt(localStorage.getItem("Hours")) * 60)) * 100;
 
-    // Have percentage max out at 100 if the calculated percentage was
+    // Have percentage max out at 100 if the calculated percentage was 
     // greater than 100.
     if (current_progress > 100) {
         current_progress = 100;
@@ -207,14 +207,6 @@ function updatePercent() {
         document.getElementById("percent").innerHTML = "Energy: "
     }
 
-       /*$("#bar").css("width", current_progress + "%")
-         current_progress -= 1; //*/
-         $("#bar").css("width", current_progress + "%")
-             .attr("aria-valuenow", current_progress)
-         //.text(current_progress + "% Complete");
-         if (current_progress <= 0)
-             clearInterval(interval);
-     }, 300); //scale this to wake up time*/
     return current_progress;
 }
 
@@ -272,7 +264,7 @@ function initBar() {
     $("#bar").css("width", current_progress + "%")
         .attr("aria-valuenow", current_progress)
     //.text(current_progress + "% Complete");
-
+    
     if (current_progress <= 0) {
         clearInterval(interval);
         $("#bar").css("width", 0 + "%")
