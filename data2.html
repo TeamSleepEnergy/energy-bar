@@ -113,7 +113,7 @@
 
                 // Calculate dimensions of the bar
                 barWidth = graphAreaWidth / numOfBars - that.margin * 2;
-                maxBarHeight = graphAreaHeight - 25;
+                maxBarHeight = graphAreaHeight - 45;
 
                 // Determine the largest value in the bar array
                 var largestValue = 0;
@@ -248,35 +248,79 @@
         var ctx = canvas.getContext('2d');
         var graph = new BarGraph(ctx);
 
+
+
         //localStorage.setItem('hours', totalSleep);
         //localStorage.setItem('day', month+"/"+day);
 
-        var sleeplog = localStorage.getItem('hours');
+
         /*
                 if(localStorage.getItem("weekArray") === null){
-                  let thisWeek = [0,0,0,0,0,0,0];
-                  localStorage.setItem('weekArray',JSON.stringify(thisWeek));
+                  let thisWeekhours = [0,0,0,0,0,0,0];
+                  localStorage.setItem('weekArray',JSON.stringify(thisWeekhours));
                 }
         /*
                 else{
-                  let thisWeek = JSON.parse(localStorage.getItem('weekArray'));
+                  let thisWeekhours = JSON.parse(localStorage.getItem('weekArray'));
                 }
         */
-        let thisWeek = localStorage.getItem('thisWeek') ? JSON.parse(localStorage.getItem('thisWeek')) : [0, 0, 0, 0, 0,
-            0,
-            0
-        ];
+        let numinputcheck = localStorage.getItem('numinputcheck') ? (localStorage.getItem('numinputcheck')) : 0;
+        let thisWeekhours = localStorage.getItem('thisWeekhours') ? JSON.parse(localStorage.getItem('thisWeekhours')) : [0];
+        let thisWeekdates = localStorage.getItem('thisWeekdates') ? JSON.parse(localStorage.getItem('thisWeekdates')) : [0];
 
-        if (localStorage.getItem("day") === null) {
 
-        } else {
-            let now = localStorage.getItem('day');
-            thisWeek[now] = localStorage.getItem('hours');
-            localStorage.setItem('thisWeek', JSON.stringify(thisWeek));
+        var datechecker = thisWeekdates.indexOf(localStorage.getItem("day"));
+
+          //dealing with the week dates
+        if(datechecker == -1){
+          if (thisWeekdates.length <7){
+            if (thisWeekdates.length == 1 && numinputcheck == 0){
+                thisWeekdates[0]=localStorage.getItem('day');
+                localStorage.setItem('thisWeekdates', JSON.stringify(thisWeekdates));
+
+            }
+            else{
+              //thisWeekdates.push( localStorage.getItem('day'));
+              thisWeekdates.push(localStorage.getItem('day'));
+              localStorage.setItem('thisWeekdates', JSON.stringify(thisWeekdates));
+            }
+          }
+          else{
+            thisWeekdates.shift();
+            thisWeekdates.push(localStorage.getItem('day'));
+            localStorage.setItem('thisWeekdates', JSON.stringify(thisWeekdates));
+          }
         }
+
+          //dealing with the week hours
+        if(datechecker == -1){
+          if (thisWeekhours.length <7){
+            if (thisWeekhours.length == 1 && numinputcheck == 0){
+                thisWeekhours[0]=localStorage.getItem('hours');
+                localStorage.setItem('thisWeekhours', JSON.stringify(thisWeekhours));
+            }
+            else{
+              thisWeekhours.push( localStorage.getItem('hours'));
+              localStorage.setItem('thisWeekhours', JSON.stringify(thisWeekhours));
+            }
+          }
+          else{
+            thisWeekhours.shift();
+            thisWeekhours.push(localStorage.getItem('hours'));
+              localStorage.setItem('thisWeekhours', JSON.stringify(thisWeekhours));
+          }
+        }
+        else{
+          thisWeekhours[datechecker]=localStorage.getItem('hours');
+          localStorage.setItem('thisWeekhours', JSON.stringify(thisWeekhours));
+        }
+
+        localStorage.setItem('numinputcheck', numinputcheck++);
+
+
         /*
 
-                localStorage.setItem('weekArray', thisWeek);
+                localStorage.setItem('weekArray', thisWeekhours);
 
                 var test = localStorage.getItem('tester');
                 test++;
@@ -298,7 +342,7 @@
         //hoursArr=localStorage.getItem('sleptHoursArray');
 
         //  var hoursArr=lsHourArr;
-        var hoursArr = thisWeek;
+        var hoursArr = thisWeekhours;
         switch (hoursArr.length) {
             case 1:
                 graph.margin = 300;
@@ -316,8 +360,24 @@
         graph.width = 800;
         graph.height = 500;
 
-        var datesArr = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-        graph.xAxisLabelArr = datesArr;
+        //var thisWeekdates = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+/*
+        var thisWeekdates = [0];
+        if (thisWeekdates.length == 1){
+          thisWeekdates[0]=LocalStorage.getItem('day');
+        }
+        else if(thisWeekdates.length > 1 && thisWeekdates.length <7){
+          thisWeekdates.push( LocalStorage.getItem('day'));
+        }
+        else{
+          thisWeekdates.shift();
+          dates.Arr.push(LocalStorage.getItem('day'));
+        }
+
+*/
+
+
+        graph.xAxisLabelArr = thisWeekdates;
         graph.yAxisLabelArr = ["Hours of Sleep"];
 
         graph.update(hoursArr);
@@ -333,6 +393,9 @@
         ctx.moveTo(0, 475);
         ctx.lineTo(790, 475);
         ctx.stroke();
+
+
+        //localStorage.clear();
     </script>
 </body>
 

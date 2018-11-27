@@ -77,7 +77,7 @@ function sleepytime() {
     var totalSleep = Math.round((((sleptHours - carryover) * 60 + sleptMin) / 60) * 10) / 10;
 
     localStorage.setItem('hours', totalSleep);
-    localStorage.setItem('day', date.getDay());
+    localStorage.setItem('day', (date.getMonth() +1) +"/" +date.getDate());
 }
 
 // Time remaining related functions
