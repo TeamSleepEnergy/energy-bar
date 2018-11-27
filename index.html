@@ -112,16 +112,8 @@
         </div>
     </div>
 
-    <div class="container" align="center">
-        <b id="timeRemain">
-            <font size="2">Time Remaining:</font>
-        </b>
-        &nbsp;
-        &nbsp;
-        <button id="gotosleep" type="button" class="btn" onclick="sleepytime(); savePopup(); clearNight();">Going to
-            Sleep!</button>
-        <b class="datapopup">Data Recorded!</b>
-        <br></br>
+
+      <div class="container" align="center">
         <b id="percent">
             <font size="2">Energy:</font>
         </b>
@@ -136,9 +128,11 @@
 
     <!-- Energy bar -->
     <div class="container">
+      <br>
+    </br>
+    <br>
+  </br>
         <div align="center">
-            <br>
-            <br>
             <div class="col">
                 <div class="progress vertical">
                     <div id="bar" class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="0"
@@ -148,342 +142,20 @@
             </div>
         </div>
     </div>
-
-    <!--Energy bar related functions-->
-    <script>
-        //localStorage.clear();
-
-        if (localStorage.getItem("Hours") === null) {
-            localStorage.setItem("Hours", 8);
-        }
-        var dropDown = document.getElementById("UserInput");
-        //localStorage.setItem("wakeString", dropDown.options[dropDown.selectedIndex].text);
-        // "Data recorded" popup
-        function savePopup() {
-            $(".datapopup").fadeIn();
-            $(".datapopup").fadeOut();
-        }
-
-        // Check to see if bar is already running
-        $('#setButton').click(function () {
-            localStorage.setItem("running", 1);
-            localStorage.setItem("wakeString", dropDown.options[dropDown.selectedIndex].text);
-            //document.write(localStorage.getItem("wakeString"));
-        });
-/*
-        var dropDown = document.getElementById("UserInput");
-        function saveWakeTime(){
-            localStorage.setItem("wakeString", dropDown.options[dropDown.selectedIndex].text);
-        }
-*/
-
-/*
-        $('#gotosleep').click(function () {
-            localStorage.setItem("running", 0);
-*/
-
-
-        if (localStorage.getItem("running") == 1) {
-            dropDown.options[dropDown.selectedIndex].text = localStorage.getItem("wakeString");
-            tRemain = setInterval(updateTime, 300);
-            percRemain = setInterval(updatePercent, 300);
-            interval = setInterval(initBar, 300);
-        }
-
-        // Record data
-        function sleepytime() {
-            var date = new Date();
-            var hour = date.getHours();
-            var min = date.getMinutes();
-            var month = date.getMonth() + 1;
-            var day = date.getDate();
-            //var dropDown = document.getElementById("UserInput");
-            localStorage.setItem("wakeString", dropDown.options[dropDown.selectedIndex].text);
-            var wakeUpString = localStorage.getItem("wakeString");//dropDown.options[dropDown.selectedIndex].text;
-            var wakeHour = Number(wakeUpString.charAt(0) + wakeUpString.charAt(1));
-            var wakeMin = Number(wakeUpString.charAt(3) + wakeUpString.charAt(4));
-            var pmCheck = wakeUpString.charAt(6);
-            var sleptHours = 0;
-
-            // Edge case for setting wake-up time to 12:00 AM & 12:30 AM
-            if (pmCheck != "P" && wakeHour == 12) {
-                wakeHour = 0;
-            }
-
-            // Sets conditional for all times except for 12:00 PM & 12:30 PM
-            if (pmCheck == "P" && wakeHour != 12) {
-                wakeHour += 12;
-            }
-
-            if (hour > wakeHour) {
-                sleptHours = 24 - hour + wakeHour;
-
-            } else if (hour < wakeHour) {
-                sleptHours = wakeHour - hour;
-
-            }
-
-            var sleptMin = Math.abs((60 - min) - wakeMin);
-            if (min > wakeMin) {
-                var carryover = 1;
-            } else {
-                var carryover = 0;
-            }
-
-            var totalSleep = Math.round((((sleptHours - carryover) * 60 + sleptMin) / 60) * 10) / 10;
-
-            localStorage.setItem('hours', totalSleep);
-            localStorage.setItem('day', date.getDay());
-        }
-
-        // Reset bar and info
-/*
-        function clearNight() {
-            $("#bar").css("width", 0 + "%")
-                .attr("aria-valuenow", 0)
-            document.getElementById("timeRemain").innerHTML = "Time Remaining: "
-            document.getElementById("percent").innerHTML = "Energy: "
-        }
-*/
-        //Time remaining related functions
-        var tRemain
-        $('#setButton').click(function () {
-            clearInterval(tRemain);
-            tRemain = setInterval(updateTime, 300);
-        })
-/*
-        $('#gotosleep').click(function () {
-            clearInterval(tRemain);
-        })
-*/
-        /*
-        function timeInterval(){
-          var tRemain = setInterval(updateTime,300);
-          return tRemain;
-        }
-
-        function timeClear(){
-          clearInterval(tRemain);
-        }
-        */
-
-        function updateTime() {
-            var date = new Date();
-            var hour = date.getHours();
-            var min = date.getMinutes()+1;
-            var sec = date.getSeconds();
-            //var dropDown = document.getElementById("UserInput");
-            localStorage.setItem("wakeString", dropDown.options[dropDown.selectedIndex].text);
-            var wakeUpString = localStorage.getItem("wakeString");//dropDown.options[dropDown.selectedIndex].text;
-            var wakeHour = Number(wakeUpString.charAt(0) + wakeUpString.charAt(1));
-            var wakeMin = Number(wakeUpString.charAt(3) + wakeUpString.charAt(4));
-            var wakeSec = 59
-            var pmCheck = wakeUpString.charAt(6);
-            var sleptHours = 0;
-
-            // Edge case for setting wake-up time to 12:00 AM & 12:30 AM
-            if (pmCheck != "P" && wakeHour == 12) {
-                wakeHour = 0;
-            }
-
-            // Sets conditional for all times except for 12:00 PM & 12:30 PM
-            if (pmCheck == "P" && wakeHour != 12) {
-                wakeHour += 12;
-            }
-
-            if (hour > wakeHour) {
-                sleptHours = 24 - hour + wakeHour;
-
-            } else if (hour < wakeHour) {
-                sleptHours = wakeHour - hour;
-
-            }
-
-            var sleptMin = 0
-            if (min > wakeMin) {
-                var carryover = 1;
-                sleptMin = (60 + wakeMin) - min;
-            } else {
-                var carryover = 0;
-                sleptMin = wakeMin - min;
-            }
-            var sleptSec = 0
-            if (sec > wakeSec){
-              sleptSec = (60 + wakeSec) - sec;
-            } else {
-              sleptSec = wakeSec - sec;
-            }
-            sleptHours = sleptHours - carryover;
-            var totalSleep = (sleptHours) * 60 + sleptMin;
-            var current_progress = (totalSleep / (parseInt(localStorage.getItem("Hours")) * 60)) * 100;
-            document.getElementById("timeRemain").innerHTML = "Time Remaining: " + sleptHours + " hours " + sleptMin +
-                " minutes " + sleptSec+ " seconds";
-            if (current_progress <= 0){
-                clearInterval(tRemain);
-                document.getElementById("timeRemain").innerHTML = "Time Remaining: "
-              }
-        }
-
-        // Percent related functions
-        var percRemain
-        $('#setButton').click(function () {
-            clearInterval(percRemain);
-            percRemain = setInterval(updatePercent, 300);
-        })
-/*
-        $('#gotosleep').click(function () {
-            clearInterval(percRemain);
-        })
-*/
-        /*
-                function percInterval(){
-                   var percRemain = setInterval(updatePercent,300);
-                   return percRemain;
-                }
-
-                function percClear(){
-                  clearInterval(percRemain);
-                }
-        */
-
-        function updatePercent() {
-            var date = new Date();
-            var hour = date.getHours();
-            var min = date.getMinutes();
-            //var dropDown = document.getElementById("UserInput");
-            localStorage.setItem("wakeString", dropDown.options[dropDown.selectedIndex].text);
-            var wakeUpString = localStorage.getItem("wakeString");//dropDown.options[dropDown.selectedIndex].text;
-            var wakeHour = Number(wakeUpString.charAt(0) + wakeUpString.charAt(1));
-            var wakeMin = Number(wakeUpString.charAt(3) + wakeUpString.charAt(4));
-            var pmCheck = wakeUpString.charAt(6);
-            var sleptHours = 0;
-
-            // Edge case for setting wake-up time to 12:00 AM & 12:30 AM
-            if (pmCheck != "P" && wakeHour == 12) {
-                wakeHour = 0;
-            }
-
-            // Sets conditional for all times except for 12:00 PM & 12:30 PM
-            if (pmCheck == "P" && wakeHour != 12) {
-                wakeHour += 12;
-            }
-
-            if (hour > wakeHour) {
-                sleptHours = 24 - hour + wakeHour;
-            } else if (hour < wakeHour) {
-                sleptHours = wakeHour - hour;
-            }
-
-            var sleptMin = 0
-            if (min > wakeMin) {
-                var carryover = 1;
-                sleptMin = (60 + wakeMin) - min;
-            } else {
-                var carryover = 0;
-                sleptMin = wakeMin - min;
-            }
-
-            var totalSleep = (sleptHours - carryover) * 60 + sleptMin;
-            var current_progress = (totalSleep / 480) * 100;
-            var avgsleep = localStorage.getItem("Hours");
-            var current_progress = (totalSleep / (parseInt(localStorage.getItem("Hours")) * 60)) * 100;
-
-            document.getElementById("percent").innerHTML = "Energy ("+Math.round(current_progress * 10) / 10 + "% of " + avgsleep + " hours of sleep)";
-            if (current_progress <= 0){
-                clearInterval(percRemain);
-                document.getElementById("percent").innerHTML = "Energy: "
-              }
-        }
-
-        // initBar related functions
-        var interval;
-        $('#setButton').click(function () {
-            clearInterval(interval);
-            interval = setInterval(initBar, 300);
-        })
-/*
-        $('#gotosleep').click(function () {
-            clearInterval(interval);
-        })
-*/
-        /*
-        function barInterval(){
-          var interval = setInterval(initBar,300);
-          return interval;
-        }
-
-        function barClear(){
-          clearInterval(interval);
-        }
-        */
-
-        function initBar() {
-            var date = new Date();
-            var hour = date.getHours();
-            var min = date.getMinutes();
-            //var dropDown = document.getElementById("UserInput");
-            localStorage.setItem("wakeString", dropDown.options[dropDown.selectedIndex].text);
-            var wakeUpString = localStorage.getItem("wakeString");//dropDown.options[dropDown.selectedIndex].text;
-            var wakeHour = Number(wakeUpString.charAt(0) + wakeUpString.charAt(1));
-            var wakeMin = Number(wakeUpString.charAt(3) + wakeUpString.charAt(4));
-            var pmCheck = wakeUpString.charAt(6);
-            var sleptHours = 0;
-
-            // Edge case for setting wake-up time to 12:00 AM & 12:30 AM
-            if (pmCheck != "P" && wakeHour == 12) {
-                wakeHour = 0;
-            }
-
-            // Sets conditional for all times except for 12:00 PM & 12:30 PM
-            if (pmCheck == "P" && wakeHour != 12) {
-                wakeHour += 12;
-            }
-
-            if (hour > wakeHour) {
-                sleptHours = 24 - hour + wakeHour;
-
-            } else if (hour < wakeHour) {
-                sleptHours = wakeHour - hour;
-
-            }
-
-            var sleptMin = 0
-            if (min > wakeMin) {
-                var carryover = 1;
-                sleptMin = (60 + wakeMin) - min;
-            } else {
-                var carryover = 0;
-                sleptMin = wakeMin - min;
-            }
-
-            var totalSleep = (sleptHours - carryover) * 60 + sleptMin;
-            //var current_progress = (totalSleep / 480) * 100;
-            var current_progress = (totalSleep / (parseInt(localStorage.getItem("Hours")) * 60)) * 100;
-            $("#bar").css("width", current_progress + "%")
-                .attr("aria-valuenow", current_progress)
-            //.text(current_progress + "% Complete");
-            if (current_progress <= 0){
-                clearInterval(interval);
-                $("#bar").css("width", 0 + "%")
-                    .attr("aria-valuenow", 0)
-              }
-        } /* scale this to wake up time */
-
-        /*       $(function () {
-                    $("#bar").css("width", 100 + "%");
-                    var current_progress = parseInt($("#bar").css("width")); //replace this value with val relative to time
-                    var interval = setInterval(function () {
-                        current_progress -= 5; //
-                        $("#bar").css("width", current_progress + "%")
-                        //.attr("aria-valuenow", current_progress)
-                        //.text(current_progress + "% Complete");
-                        /*if(current_progress <= 0)
-                            clearInterval(interval);*/
-        //       }, 1000); //scale this to wake up time
-        //    });
-
-        //var timeDown = setInterval(decBar, 1000);
-    </script>
+    <br>
+  </br>
+  <br>
+</br>
+    <div class="container" align="center">
+        <b id="timeRemain">
+            <font size="2">Time Remaining:</font>
+        </b>
+        &nbsp;
+        &nbsp;
+        <button id="gotosleep" type="button" class="btn btn-danger" onclick="sleepytime(); savePopup(); clearNight();">Going to
+            Sleep!</button>
+        <b class="datapopup">Data Recorded!</b>
+      </div>
 </body>
 
 </html>

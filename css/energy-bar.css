@@ -27,7 +27,7 @@
 
 .vertical {
     display: inline-block;
-    width: 270px;
+    width: 370px;
     height: 200px;
     -webkit-transform: rotate(-90deg);
     /* Chrome, Safari, Opera */
