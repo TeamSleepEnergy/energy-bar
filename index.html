@@ -14,6 +14,7 @@
     <link href="css/energy-bar.css" rel="stylesheet">
     <link href="css/clock.css" rel="stylesheet">
     <link href="css/help-modal.css" rel="stylesheet">
+    <link href="css/index.css" rel="stylesheet">
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" defer></script>
@@ -127,12 +128,7 @@
         </div>
     </div>
 
-
-      <div class="container" align="center">
-        <b id="percent">
-            <font size="2">Energy:</font>
-        </b>
-    </div>
+    <div id="percent"></div>
 
     <!-- Health effects popover -->
     <div class="container" align="right">
@@ -143,10 +139,10 @@
 
     <!-- Energy bar -->
     <div class="container">
-      <br>
-    </br>
-    <br>
-  </br>
+        <br>
+        </br>
+        <br>
+        </br>
         <div align="center">
             <div class="col">
                 <div class="progress vertical">
@@ -157,20 +153,18 @@
             </div>
         </div>
     </div>
-    <br>
-  </br>
-  <br>
-</br>
+
+    <br></br>
+    <br></br>
+
     <div class="container" align="center">
-        <b id="timeRemain">
-            <font size="2">Time Remaining:</font>
-        </b>
+        <div id="timeRemain"></div>
+        <br>
         &nbsp;
         &nbsp;
-        <button id="gotosleep" type="button" class="btn btn-danger" onclick="sleepytime(); savePopup(); clearNight();">Going to
-            Sleep!</button>
+        <button id="gotosleep" type="button" class="btn btn-danger" onclick="sleepytime(); savePopup(); clearNight();">Going to Sleep!</button>
         <b class="datapopup">Data Recorded!</b>
-      </div>
+    </div>
 </body>
 
 </html>

@@ -1,0 +1,7 @@
+#percent {
+    text-align: center;
+}
+
+#percent span, #timeRemain span {
+    text-decoration: underline;
+}

@@ -137,11 +137,12 @@ function updateTime() {
     sleptHours = sleptHours - carryover;
     var totalSleep = (sleptHours) * 60 + sleptMin;
     var current_progress = (totalSleep / (parseInt(localStorage.getItem("Hours")) * 60)) * 100;
-    document.getElementById("timeRemain").innerHTML = "Time Remaining: " + sleptHours + " hours " + sleptMin +
-        " minutes " + sleptSec + " seconds";
+
+    document.getElementById("timeRemain").innerHTML = "<b>SLEEP TIME REMAINING</b>: <span>" + sleptHours + " hours, " + sleptMin + " minutes, " + sleptSec + " seconds</span>";
+
     if (current_progress <= 0) {
         clearInterval(tRemain);
-        document.getElementById("timeRemain").innerHTML = "Time Remaining: "
+        document.getElementById("timeRemain").innerHTML = "SLEEP TIME REMAINING: "
     }
 }
 
@@ -201,7 +202,10 @@ function updatePercent() {
         current_progress = 100;
     }
 
-    document.getElementById("percent").innerHTML = "Energy ("+Math.round(current_progress * 10) / 10 + "% of " + avgsleep + " hours of sleep)";
+    var percent_value = Math.round(current_progress * 10) / 10;
+    var percent_value_str = percent_value.toString().fixed();
+
+    document.getElementById("percent").innerHTML = "<b>ENERGY</b>: (<span>" + percent_value_str + "%</span> per " + avgsleep + " hours of sleep)";
 
     if (current_progress <= 0) {
         clearInterval(percRemain);
@@ -271,4 +275,9 @@ function initBar() {
         $("#bar").css("width", 0 + "%")
             .attr("aria-valuenow", 0)
     }
-} /* scale this to wake up time */
+} 
+
+// Window alert when user clicks on 'Going to Sleep!' button
+$('#gotosleep').on('click touch', function() {
+    alert("Data recorded! Please go to the 'Data' page to view your data.");
+})
