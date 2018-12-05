@@ -49,37 +49,8 @@
             var that = this;
             var startArr;
             var endArr;
-            var looping = false;
 
-            // Loop method adjusts the height of bar and redraws if neccessary
-            var loop = function () {
-
-                var delta;
-                var animationComplete = true;
-
-                // Boolean to prevent update function from looping if already looping
-                looping = true;
-
-                // For each bar
-                for (var i = 0; i < endArr.length; i += 1) {
-                    // Change the current bar height toward its target height
-                    delta = (endArr[i] - startArr[i]) / that.animationSteps;
-                    that.curArr[i] += delta;
-                    // If any change is made then flip a switch
-                    if (delta) {
-                        animationComplete = false;
-                    }
-                }
-                // If no change was made to any bars then we are done
-                if (animationComplete) {
-                    looping = false;
-                } else {
-                    // Draw and call loop again
-                    draw(that.curArr);
-                    setTimeout(loop, that.animationInterval / that.animationSteps);
-                }
-            };
-
+        
             // Draw method updates the canvas with the current display
             var draw = function (arr) {
                 var numOfBars = arr.length;
@@ -126,6 +97,45 @@
                 // For each bar
                 for (i = 0; i < arr.length; i += 1) {
                     // Set the ratio of current bar compared to the maximum
+                    var ratioswitch = parseInt(localStorage.getItem("Hours"));
+
+                    switch (ratioswitch) {
+                        case 3:
+                            ratio = 100;
+                            break;
+                        case 4:
+                            ratio = 85;
+                            break;
+                        case 5:
+                            ratio = 74;
+                            break;
+                        case 6:
+                            ratio = 63;
+                            break;
+                        case 7:
+                            ratio = 55;
+                            break;
+                        case 8:
+                            ratio = 48;
+                            break;
+                        case 9:
+                            ratio = 44;
+                            break;
+                        case 10:
+                            ratio = 40;
+                            break;
+                        case 11:
+                            ratio = 37;
+                            break;
+                        case 12:
+                            ratio = 34;
+                            break;
+                        default:
+                            ratio = 30;
+                    }
+
+                    /****************************************************************/
+                    /*
                     if (that.maxValue) {
                         ratio = arr[i] / that.maxValue;
                     } else {
@@ -133,6 +143,24 @@
                     }
 
                     barHeight = ratio * maxBarHeight;
+                    */
+                    // This will work if using ratio doesn't
+                    /*
+                    var dispBarHeight = arr[i]*50;
+                    if( dispBarHeight > maxBarHeight){
+                      barHeight = maxBarHeight;
+                    }
+                    else{
+                      barHeight = dispBarHeight;
+                    }
+                    */
+                    if (arr[i] <= parseInt(localStorage.getItem("Hours"))){
+                      barHeight = ratio * arr[i];
+                    }
+                    else{
+                      barHeight = (ratio) * (parseInt(localStorage.getItem("Hours"))+1);
+                    }
+                      document.write( "ratio is:" + ratio+"; ratioswitch is: "+ratioswitch +" barheight is: " +barHeight)
 
                     // Turn on shadow
                     ctx.shadowOffsetX = 2;
@@ -174,9 +202,20 @@
                     ctx.textAlign = "center";
                     // Use try / catch to stop IE 8 from going to error town
                     try {
+
+
+                      if(arr[i] <= parseInt(localStorage.getItem("Hours"))){
                         ctx.fillText(parseFloat(arr[i], 10),
                             i * that.width / numOfBars + (that.width / numOfBars) / 2,
                             graphAreaHeight - barHeight - 10);
+                      }
+                      else{
+                        ctx.fillText(localStorage.getItem("Hours")+"+",
+                            i * that.width / numOfBars + (that.width / numOfBars) / 2,
+                            graphAreaHeight - barHeight - 10);
+                      }
+
+
                     } catch (ex) {}
                     // Draw bar label if it exists
                     if (that.xAxisLabelArr[i]) {
