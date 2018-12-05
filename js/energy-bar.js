@@ -90,6 +90,7 @@ $(document).ready(function () {
 });
 
 function updateTime() {
+    localStorage.setItem("wakeSelect", dropDown.selectedIndex);
     var date = new Date();
     var hour = date.getHours();
     var min = date.getMinutes() + 1;
