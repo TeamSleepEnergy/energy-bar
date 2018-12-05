@@ -1,4 +1,5 @@
 var dropDown, tRemain, percRemain, interval;
+//localStorage.clear();
 
 //localStorage.clear();
 $(document).ready(function () {
@@ -20,14 +21,14 @@ function savePopup() {
 $(document).ready(function () {
     $('#setButton').click(function () {
         localStorage.setItem("running", 1);
-        localStorage.setItem("wakeString", dropDown.options[dropDown.selectedIndex].text);
-        //document.write(localStorage.getItem("wakeString"));
+        localStorage.setItem("wakeSelect", dropDown.selectedIndex);//dropDown.options[dropDown.selectedIndex].outerHTML);//.text);
+        //document.write(localStorage.getItem("wakeSelect"));
     });
 });
 
 $(document).ready(function () {
     if (localStorage.getItem("running") == 1) {
-        dropDown.options[dropDown.selectedIndex].text = localStorage.getItem("wakeString");
+        /*dropDown.options[dropDown.selectedIndex].outerHTML/*.text*/dropDown.selectedIndex = localStorage.getItem("wakeSelect");
         tRemain = setInterval(updateTime, 300);
         percRemain = setInterval(updatePercent, 300);
         interval = setInterval(initBar, 300);
@@ -94,7 +95,7 @@ function updateTime() {
     var min = date.getMinutes() + 1;
     var sec = date.getSeconds();
     //var dropDown = document.getElementById("UserInput");
-    //localStorage.setItem("wakeString", dropDown.options[dropDown.selectedIndex].text);
+    localStorage.setItem("wakeString", dropDown.options[dropDown.selectedIndex].text);
     var wakeUpString = localStorage.getItem("wakeString"); //dropDown.options[dropDown.selectedIndex].text;
     var wakeHour = Number(wakeUpString.charAt(0) + wakeUpString.charAt(1));
     var wakeMin = Number(wakeUpString.charAt(3) + wakeUpString.charAt(4));
@@ -275,7 +276,7 @@ function initBar() {
         $("#bar").css("width", 0 + "%")
             .attr("aria-valuenow", 0)
     }
-} 
+}
 
 // Window alert when user clicks on 'Going to Sleep!' button
 $('#gotosleep').on('click touch', function() {
