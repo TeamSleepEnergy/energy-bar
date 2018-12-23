@@ -262,6 +262,10 @@ function initBar() {
     $("#bar").css("width", current_progress + "%")
         .attr("aria-valuenow", current_progress)
     
+    // Changes color of energy bar in different percentage ranges.
+    // 75%-100% (green)
+    // 45%-74% (orange)
+    // 0%-45% (red)
     if (current_progress >= 75) {
         $(".progress-bar").css("background", "#5cd65c")
     } else if (current_progress < 75 && current_progress >= 45) {
