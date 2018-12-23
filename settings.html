@@ -20,12 +20,7 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js" defer></script>
     <script src="js/sidenav.js" defer></script>
-
-    <style>
-        b.a{
-    display: none;
-  }
-  </style>
+    <script src="js/settings.js" defer></script>
 </head>
 
 <body>
@@ -119,57 +114,6 @@
     </div>
     </div>
 
-    <script>
-        /*var checkhours = document.getElementById("hoursinput").value;
-  if(checkhours === null){
-    checkhours = 8;
-    localStorage.setItem("Hours", checkhours);
-  }*/
-        // Save popup
-        function savedisp() {
-            $(".a").fadeIn();
-            $(".a").fadeOut();
-        }
-
-        // Form variables
-        var feet = document.getElementById('feetinput');
-        var inches = document.getElementById('inchinput');
-        var gender = document.getElementById('genderinput');
-        var age = document.getElementById('ageinput');
-        var weight = document.getElementById('weightinput');
-        var hours = document.getElementById('hoursinput');
-        var alertInt = document.getElementById('alertinput');
-
-        //init localstorage
-        /*localStorage.setItem("Feet", feet.value);
-        localStorage.setItem("Inch", inches.value);
-        localStorage.setItem("Gender", gender.value);
-        localStorage.setItem("Age", age.value);
-        localStorage.setItem("Weight", weight.value);
-        localStorage.setItem("Bedtime", bedtime.value);
-        localStorage.setItem("Alerts", alertInt.value);
-        */
-
-        // Save to local storage
-        function saveForm() {
-            localStorage.setItem("Feet", feet.value);
-            localStorage.setItem("Inch", inches.value);
-            localStorage.setItem("Gender", gender.value);
-            localStorage.setItem("Age", age.value);
-            localStorage.setItem("Weight", weight.value);
-            localStorage.setItem("Hours", hours.value);
-            localStorage.setItem("Alerts", alertInt.value);
-        }
-
-        // Recall local storage
-        feet.value = localStorage.getItem("Feet");
-        inches.value = localStorage.getItem("Inch");
-        gender.value = localStorage.getItem("Gender");
-        age.value = localStorage.getItem("Age");
-        weight.value = localStorage.getItem("Weight");
-        hours.value = localStorage.getItem("Hours");
-        alertInt.value = localStorage.getItem("Alerts");
-    </script>
 </body>
 
 </html>
