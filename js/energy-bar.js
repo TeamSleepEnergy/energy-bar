@@ -1,14 +1,11 @@
 var dropDown, tRemain, percRemain, interval;
-//localStorage.clear();
 
-//localStorage.clear();
 $(document).ready(function () {
     if (localStorage.getItem("Hours") === null) {
         localStorage.setItem("Hours", 8);
     }
 
     dropDown = document.getElementById("UserInput");
-    //localStorage.setItem("wakeString", dropDown.options[dropDown.selectedIndex].text);
 });
 
 // "Data recorded" popup
@@ -21,14 +18,13 @@ function savePopup() {
 $(document).ready(function () {
     $('#setButton').click(function () {
         localStorage.setItem("running", 1);
-        localStorage.setItem("wakeSelect", dropDown.selectedIndex);//dropDown.options[dropDown.selectedIndex].outerHTML);//.text);
-        //document.write(localStorage.getItem("wakeSelect"));
+        localStorage.setItem("wakeSelect", dropDown.selectedIndex);
     });
 });
 
 $(document).ready(function () {
     if (localStorage.getItem("running") == 1) {
-        /*dropDown.options[dropDown.selectedIndex].outerHTML/*.text*/dropDown.selectedIndex = localStorage.getItem("wakeSelect");
+        dropDown.selectedIndex = localStorage.getItem("wakeSelect");
         tRemain = setInterval(updateTime, 300);
         percRemain = setInterval(updatePercent, 300);
         interval = setInterval(initBar, 300);
@@ -42,9 +38,8 @@ function sleepytime() {
     var min = date.getMinutes();
     var month = date.getMonth() + 1;
     var day = date.getDate();
-    //var dropDown = document.getElementById("UserInput");
     localStorage.setItem("wakeString", dropDown.options[dropDown.selectedIndex].text);
-    var wakeUpString = localStorage.getItem("wakeString"); //dropDown.options[dropDown.selectedIndex].text;
+    var wakeUpString = localStorage.getItem("wakeString"); 
     var wakeHour = Number(wakeUpString.charAt(0) + wakeUpString.charAt(1));
     var wakeMin = Number(wakeUpString.charAt(3) + wakeUpString.charAt(4));
     var pmCheck = wakeUpString.charAt(6);
@@ -95,9 +90,8 @@ function updateTime() {
     var hour = date.getHours();
     var min = date.getMinutes() + 1;
     var sec = date.getSeconds();
-    //var dropDown = document.getElementById("UserInput");
     localStorage.setItem("wakeString", dropDown.options[dropDown.selectedIndex].text);
-    var wakeUpString = localStorage.getItem("wakeString"); //dropDown.options[dropDown.selectedIndex].text;
+    var wakeUpString = localStorage.getItem("wakeString"); 
     var wakeHour = Number(wakeUpString.charAt(0) + wakeUpString.charAt(1));
     var wakeMin = Number(wakeUpString.charAt(3) + wakeUpString.charAt(4));
     var wakeSec = 59
@@ -160,9 +154,8 @@ function updatePercent() {
     var date = new Date();
     var hour = date.getHours();
     var min = date.getMinutes();
-    //var dropDown = document.getElementById("UserInput");
     localStorage.setItem("wakeString", dropDown.options[dropDown.selectedIndex].text);
-    var wakeUpString = localStorage.getItem("wakeString"); //dropDown.options[dropDown.selectedIndex].text;
+    var wakeUpString = localStorage.getItem("wakeString"); 
     var wakeHour = Number(wakeUpString.charAt(0) + wakeUpString.charAt(1));
     var wakeMin = Number(wakeUpString.charAt(3) + wakeUpString.charAt(4));
     var pmCheck = wakeUpString.charAt(6);
@@ -229,9 +222,8 @@ function initBar() {
     var date = new Date();
     var hour = date.getHours();
     var min = date.getMinutes();
-    //var dropDown = document.getElementById("UserInput");
     localStorage.setItem("wakeString", dropDown.options[dropDown.selectedIndex].text);
-    var wakeUpString = localStorage.getItem("wakeString"); //dropDown.options[dropDown.selectedIndex].text;
+    var wakeUpString = localStorage.getItem("wakeString"); 
     var wakeHour = Number(wakeUpString.charAt(0) + wakeUpString.charAt(1));
     var wakeMin = Number(wakeUpString.charAt(3) + wakeUpString.charAt(4));
     var pmCheck = wakeUpString.charAt(6);
@@ -265,12 +257,18 @@ function initBar() {
     }
 
     var totalSleep = (sleptHours - carryover) * 60 + sleptMin;
-    //var current_progress = (totalSleep / 480) * 100;
     var current_progress = (totalSleep / (parseInt(localStorage.getItem("Hours")) * 60)) * 100;
 
     $("#bar").css("width", current_progress + "%")
         .attr("aria-valuenow", current_progress)
-    //.text(current_progress + "% Complete");
+    
+    if (current_progress >= 75) {
+        $(".progress-bar").css("background", "#5cd65c")
+    } else if (current_progress < 75 && current_progress >= 45) {
+        $(".progress-bar").css("background", "#ff9933")
+    } else {
+        $(".progress-bar").css("background", "#ff0066")
+    }
 
     if (current_progress <= 0) {
         clearInterval(interval);
