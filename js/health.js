@@ -9,18 +9,18 @@ $('#health').popover({
 
 /**
  * Health effect messages to be displayed when user clicks on "Health Effects"
- * popover. 
- * 
+ * popover.
+ *
  * greenMessage: 75% - 100% energy range
  * yellowMessage: 45% - 74% energy range
  * redMessage: < 45% energy
  */
-var greenMessage = "<ul> <li>Feel alert & awake throughout the day</li> <li>Optimal concentration when performing tasks</li> <li>You'll feel happier</li> </ul>";
+var greenMessage = "<ul> <li>Feel alert & awake throughout the day</li> <li>Optimal concentration when performing tasks</li> <li>Boosts mental wellbeing</li> <li>Boosts immunity; more capable of fending off colds and flu</li> </ul>";
 var yellowMessage = "<ul> <li>Decreased attention and cognitive reasoning</li> <li>Sub-optimal physical performance</li> <li>Increased stress responses</li> </ul>";
-var redMessage = "<ul> <li>Extreme grogginess</li> <li>Increased risk for heart disease, high blood pressure, and diabetes</li> <li>Lowered immune system; more likely you will get sick</li> </ul>";
+var redMessage = "<ul> <li>Extreme grogginess</li> <li>Increased risk for heart disease, high blood pressure, and diabetes</li> <li>Lowered immune system; more likely to get colds or flu</li> <li>Poor hand-eye coordination; sleep-deprived people perform hand-eye coordination tasks just as bad as, if not worse than, intoxicated people</li> <li>Ages your skin as the stress hormone cortisol will break down skin collagen, which is the protein that keeps your skin smooth and elastic</li> </ul>";
 
 /**
- * Upon every click or screen touch, the "Health Effects" message will 
+ * Upon every click or screen touch, the "Health Effects" message will
  * change depending on the user's intended amount of sleep.
  */
 $(document).on('click touch', function () {
