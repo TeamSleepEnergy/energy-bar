@@ -42,17 +42,15 @@
         <canvas id="canvasID"></canvas>
     </div>
 
-    <!-- javavascript for bargraph -->
+    <!-- JavaScript for bar graph -->
     <script src="barGraph.js"></script>
     <script>
         function BarGraph(ctx) {
 
             // Private properties and methods
-
             var that = this;
             var startArr;
             var endArr;
-
 
             // Draw method updates the canvas with the current display
             var draw = function (arr) {
@@ -205,8 +203,6 @@
                     ctx.textAlign = "center";
                     // Use try / catch to stop IE 8 from going to error town
                     try {
-
-
                       if(arr[i] <= parseInt(localStorage.getItem("Hours"))){
                         ctx.fillText(parseFloat(arr[i], 10),
                             i * that.width / numOfBars + (that.width / numOfBars) / 2,
@@ -217,9 +213,8 @@
                             i * that.width / numOfBars + (that.width / numOfBars) / 2,
                             graphAreaHeight - barHeight - 10);
                       }
-
-
                     } catch (ex) {}
+                    
                     // Draw bar label if it exists
                     if (that.xAxisLabelArr[i]) {
                         // Use try / catch to stop IE 8 from going to error town
@@ -236,7 +231,7 @@
 
                 // Set up a y-axis
                 if (that.yAxisLabelArr[0]) {
-                    // Use try / catch to stop IE 8 from going to error town
+                    // Use try-catch to stop IE 8 from going to error town
                     ctx.fillStyle = "#333";
                     ctx.font = "bold 16px sans-serif";
                     ctx.textAlign = "center";
@@ -268,7 +263,6 @@
 
             // Update method sets the end bar array and starts the animation
             this.update = function (newArr) {
-
                 // If length of target and current array is different
                 if (that.curArr.length !== newArr.length) {
                     that.curArr = newArr;
@@ -290,11 +284,8 @@
         var ctx = canvas.getContext('2d');
         var graph = new BarGraph(ctx);
 
-
-
         //localStorage.setItem('hours', totalSleep);
         //localStorage.setItem('day', month+"/"+day);
-
 
         /*
                 if(localStorage.getItem("weekArray") === null){
@@ -306,59 +297,53 @@
                   let thisWeekhours = JSON.parse(localStorage.getItem('weekArray'));
                 }
         */
+        
         let numinputcheck = localStorage.getItem('numinputcheck') ? (localStorage.getItem('numinputcheck')) : 0;
         let thisWeekhours = localStorage.getItem('thisWeekhours') ? JSON.parse(localStorage.getItem('thisWeekhours')) : [0];
         let thisWeekdates = localStorage.getItem('thisWeekdates') ? JSON.parse(localStorage.getItem('thisWeekdates')) : [0];
-
-
+        
         var datechecker = thisWeekdates.indexOf(localStorage.getItem("day"));
 
-          //dealing with the week dates
-        if(datechecker == -1){
-          if (thisWeekdates.length <7){
-            if (thisWeekdates.length == 1 && numinputcheck == 0){
+        // Numerical dates
+        if (datechecker == -1) {
+          if (thisWeekdates.length < 7) {
+            if (thisWeekdates.length == 1 && numinputcheck == 0) {
                 thisWeekdates[0]=localStorage.getItem('day');
                 localStorage.setItem('thisWeekdates', JSON.stringify(thisWeekdates));
 
-            }
-            else{
+            } else {
               //thisWeekdates.push( localStorage.getItem('day'));
               thisWeekdates.push(localStorage.getItem('day'));
               localStorage.setItem('thisWeekdates', JSON.stringify(thisWeekdates));
             }
-          }
-          else{
+          } else {
             thisWeekdates.shift();
             thisWeekdates.push(localStorage.getItem('day'));
             localStorage.setItem('thisWeekdates', JSON.stringify(thisWeekdates));
           }
         }
 
-          //dealing with the week hours
-        if(datechecker == -1){
-          if (thisWeekhours.length <7){
-            if (thisWeekhours.length == 1 && numinputcheck == 0){
+        // Hours of sleep for that day
+        if (datechecker == -1) {
+          if (thisWeekhours.length < 7) {
+            if (thisWeekhours.length == 1 && numinputcheck == 0) {
                 thisWeekhours[0]=localStorage.getItem('hours');
                 localStorage.setItem('thisWeekhours', JSON.stringify(thisWeekhours));
-            }
-            else{
+            } else {
               thisWeekhours.push( localStorage.getItem('hours'));
               localStorage.setItem('thisWeekhours', JSON.stringify(thisWeekhours));
             }
-          }
-          else{
+          } else {
             thisWeekhours.shift();
             thisWeekhours.push(localStorage.getItem('hours'));
-              localStorage.setItem('thisWeekhours', JSON.stringify(thisWeekhours));
+            localStorage.setItem('thisWeekhours', JSON.stringify(thisWeekhours));
           }
-        }
-        else{
+        } else {
           thisWeekhours[datechecker]=localStorage.getItem('hours');
           localStorage.setItem('thisWeekhours', JSON.stringify(thisWeekhours));
         }
 
         localStorage.setItem('numinputcheck', numinputcheck++);
-
 
         /*
 
@@ -417,8 +402,6 @@
         }
 
 */
-
-
         graph.xAxisLabelArr = thisWeekdates;
         graph.yAxisLabelArr = ["Hours of Sleep"];
 
@@ -435,7 +418,6 @@
         ctx.moveTo(0, 475);
         ctx.lineTo(790, 475);
         ctx.stroke();
-
 
         //localStorage.clear();
     </script>
