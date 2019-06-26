@@ -1,6 +1,6 @@
 # Sleep Status Web App
 
-https://teamsleepenergy.github.io/energy-bar/login
+https://teamsleepenergy.github.io/sleep-status/login
 
 ///// CREDITS ///// 
 <ul>
