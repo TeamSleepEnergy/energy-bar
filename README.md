@@ -1,4 +1,4 @@
-# Sleep Energy Bar Web App
+# Sleep Status Web App
 
 https://teamsleepenergy.github.io/energy-bar/login
 
